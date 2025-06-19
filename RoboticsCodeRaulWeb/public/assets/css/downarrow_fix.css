@@ -1,0 +1,4 @@
+.note-btn.dropdown-toggle::after {
+    display: none !important;
+    /* Remove a seta duplicada */
+}

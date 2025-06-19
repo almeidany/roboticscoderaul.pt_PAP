@@ -1,0 +1,14 @@
+    /* Esconde o iframe de desktop em ecrãs pequenos */
+    .map-desktop {
+        display: none;
+    }
+
+    /* Mostra o iframe de desktop apenas em ecrãs com pelo menos 992px (Bootstrap lg breakpoint) */
+    @media (min-width: 992px) {
+        .map-mobile {
+            display: none;
+        }
+        .map-desktop {
+            display: block;
+        }
+    }

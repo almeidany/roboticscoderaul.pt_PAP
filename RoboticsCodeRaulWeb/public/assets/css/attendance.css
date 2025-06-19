@@ -1,0 +1,17 @@
+.center-container {
+    position: absolute;
+    top: 50%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+
+.center-container .card {
+    width: 100%;
+    max-width: 600px;
+    /* Limita a largura máxima da card */
+}

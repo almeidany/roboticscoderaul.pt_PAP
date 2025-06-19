@@ -1,0 +1,10 @@
+.rounded-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+    cursor: pointer;
+}

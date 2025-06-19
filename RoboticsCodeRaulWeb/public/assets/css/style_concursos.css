@@ -1,0 +1,86 @@
+/* ===== CONCURSOS - ESTILO DEDICADO ===== */
+
+/* Reset para prevenir scroll lateral */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Container geral para garantir boa largura e alinhamento */
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow-x: hidden;
+}
+
+/* Texto introdutório */
+.col-lg-5 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Serviço - cada box */
+.service-item {
+    overflow: hidden;
+    border-radius: 1rem;
+    padding: 20px;
+    background-color: #f8f9fa;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+/* Ícone ou logotipo do serviço */
+.service-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.service-icon img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Botões dentro das boxes */
+.service-item .btn {
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+/* Headings dentro dos serviços */
+.service-item h5 {
+    font-weight: 600;
+}
+
+/* Responsividade extra para evitar quebras */
+@media (max-width: 768px) {
+    .col-md-6 {
+        padding-top: 0 !important;
+    }
+
+    .service-item {
+        padding: 15px;
+    }
+}
+
+/* Correções de espaçamento */
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.mt-auto {
+    margin-top: auto !important;
+}
+
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

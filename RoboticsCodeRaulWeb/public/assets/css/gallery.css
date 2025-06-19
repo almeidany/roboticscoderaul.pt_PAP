@@ -1,0 +1,75 @@
+#yearButtons {
+    text-align: center;
+}
+
+#yearButtons .btn {
+    margin: 10px;
+    border-radius: 30px;
+    padding: 8px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: 2px solid transparent;
+    box-shadow: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#yearButtons .btn:hover {
+    border-color: #002B5B;
+    background-color: #002B5B;
+    color: #fff;
+}
+
+#yearButtons .btn.active {
+    background-color: transparent;
+    color: #002B5B;
+    border: 2px solid #002B5B;
+    box-shadow: none;
+}
+
+#mainContent .subtitle {
+    display: inline-block;
+    margin: 20px;
+    /* Aumentar o espaçamento entre os itens */
+    text-align: center;
+    width: calc(20% - 40px);
+    /* Ajustar a largura para ocupar mais espaço */
+    vertical-align: top;
+    border: 2px solid red;
+    /* Borda visível ao redor do contêiner */
+    border-radius: 10px;
+    /* Bordas arredondadas para o contêiner */
+    padding: 10px;
+    /* Espaçamento interno no contêiner */
+    transition: transform 0.3s ease;
+    /* Transição suave para o efeito de hover */
+}
+
+#mainContent .subtitle:hover {
+    transform: scale(1.05);
+    /* Efeito de zoom ao passar o mouse */
+}
+
+#mainContent .subtitle img {
+    cursor: pointer;
+    width: 100%;
+    /* Ajustar a largura para ocupar todo o espaço do contêiner */
+    height: auto;
+    /* Manter a proporção da imagem */
+    object-fit: cover;
+    border-radius: 10px;
+    /* Bordas arredondadas para a imagem */
+    margin-bottom: 10px;
+    /* Aumentar o espaçamento abaixo da imagem */
+}
+
+.sitestar-logo {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    max-width: 100px;
+    opacity: 0.1;
+    pointer-events: none;
+}

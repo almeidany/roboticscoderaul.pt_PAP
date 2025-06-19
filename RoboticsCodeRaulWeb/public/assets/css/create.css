@@ -1,0 +1,21 @@
+/* Estilo para posicionar o div no canto inferior esquerdo */
+.fixed-bottom-left {
+    position: fixed;
+    /* Fixa o div na tela */
+    bottom: 20px;
+    /* Distância do fundo da tela */
+    left: 285px;
+    /* Distância da borda esquerda */
+    z-index: 1000;
+    /* Garante que o div fique acima de outros elementos */
+}
+
+/* Ajustes para dispositivos móveis (telas menores que 768px) */
+@media (max-width: 767.98px) {
+    .fixed-bottom-left {
+        left: 20px;
+        /* Distância menor da borda esquerda para dispositivos móveis */
+        bottom: 20px;
+        /* Distância menor do fundo para dispositivos móveis */
+    }
+}

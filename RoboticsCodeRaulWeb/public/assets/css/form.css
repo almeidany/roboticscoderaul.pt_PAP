@@ -1,0 +1,11 @@
+h2 {
+    text-align: center;
+    font-size: 2em;
+}
+
+.btn {
+    padding: 0.5em 1em;
+    margin-right: 1em;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
