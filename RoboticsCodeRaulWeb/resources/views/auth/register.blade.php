@@ -1,260 +1,273 @@
-  <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html lang="en">
 
-  @include('layouts.register.head')
+@include('layouts.register.head')
 
-  <body>
-      <div class="main">
-          <input type="checkbox" id="chk" aria-hidden="true">
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5" style="width: 140%; align-items: center; margin-left: -20%;">
+                <div class="card-heading">
+                    <h2 class="title">Registo de Membro</h2>
+                </div>
+                <div class="card-body">
+                    @if (session()->has('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('message') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
 
-          <div class="card-body">
-              @if (session()->has('message'))
-                  <div class="alert alert-success alert-dismissible fade show" role="alert">
-                      <strong>{{ session('message') }}</strong>
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-              @endif
-          </div>
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        @csrf
 
-          <!-- Formulário de Registro -->
-          <div class="signup">
-              <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                  @csrf
-                  <label for="chk" aria-hidden="true">Registar</label>
+                        <!-- Nome -->
+                        <div class="form-row">
+                            <div class="name">Nome</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5 @error('first_name') is-invalid @enderror"
+                                                type="text" name="first_name" value="{{ old('first_name') }}"
+                                                placeholder="Primeiro Nome" required style="width: 100%">
+                                            @error('first_name')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5 @error('last_name') is-invalid @enderror"
+                                                type="text" name="last_name" value="{{ old('last_name') }}"
+                                                placeholder="Último Nome" required style="width: 100%">
+                                            @error('last_name')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                  <div class="row">
-                      <!-- Primeiro Nome -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Primeiro Nome</label>
-                              <input type="text" name="first_name" id="first_name"
-                                  class="form-field @error('first_name') is-invalid @enderror"
-                                  value="{{ old('first_name') }}" placeholder="Primeiro Nome" required>
-                              @error('first_name')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
+                        <!-- ... (código anterior mantido igual até a seção de Dados Pessoais) ... -->
 
-                      <!-- Último Nome -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Último Nome</label>
-                              <input type="text" name="last_name" id="last_name"
-                                  class="form-field @error('last_name') is-invalid @enderror"
-                                  value="{{ old('last_name') }}" placeholder="Último Nome" required>
-                              @error('last_name')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
-                  </div>
+                        <!-- Dados Pessoais -->
+                        <div class="form-row">
+                            <div class="name">Dados Pessoais</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <div class="rs-select2 js-select-simple select--no-search"
+                                                style="margin-top: 20px;">
+                                                <select name="tshirt_size" class="select2" required>
+                                                    <option disabled selected>Tamanho T-shirt</option>
+                                                    @foreach ($tshirt_sizes as $size)
+                                                        <option value="{{ $size->tshirt_size }}"
+                                                            {{ old('tshirt_size') == $size->tshirt_size ? 'selected' : '' }}>
+                                                            {{ $size->tshirt_size }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input type="date" name="birth_date" class="input--style-5" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ... (restante do código mantido igual) ... -->
 
-                  <div class="row">
-                      <!-- Número de Aluno -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Número de Aluno</label>
-                              <input type="text" name="schoolnumber" id="schoolnumber"
-                                  class="form-field @error('schoolnumber') is-invalid @enderror"
-                                  value="{{ old('schoolnumber') }}" placeholder="Número de Aluno" required>
-                              @error('schoolnumber')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
+                        <!-- Email e Telefone -->
+                        <div class="form-row">
+                            <div class="name">Contactos</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5 @error('email') is-invalid @enderror"
+                                                type="email" name="email" value="{{ old('email') }}"
+                                                placeholder="Email Institucional" required>
+                                            @error('email')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5 @error('phonenumber') is-invalid @enderror"
+                                                type="text" name="phonenumber" value="{{ old('phonenumber') }}"
+                                                placeholder="Número de Telefone" required>
+                                            @error('phonenumber')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                      <!-- Data de Nascimento -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Data de Nascimento</label>
-                              <input type="date" name="birth_date" id="birth_date"
-                                  class="form-field @error('birth_date') is-invalid @enderror"
-                                  value="{{ old('birth_date') }}" required>
-                              @error('birth_date')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
-                  </div>
+                        <!-- Turma e Tamanho T-shirt -->
+                        <div class="form-row">
+                            <div class="name">Escola</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5 @error('class') is-invalid @enderror"
+                                                type="text" name="class" value="{{ old('class') }}"
+                                                placeholder="Turma">
+                                            @error('class')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5 @error('schoolnumber') is-invalid @enderror"
+                                                type="text" name="schoolnumber" value="{{ old('schoolnumber') }}"
+                                                placeholder="Número de Processo" required style="width: 100%;">
+                                            <!-- width 100% -->
+                                            @error('schoolnumber')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                  <div class="row">
-                      <!-- Email -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Email</label>
-                              <input type="email" name="email" id="email"
-                                  class="form-field @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                                  placeholder="Email" required>
-                              @error('email')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
+                        <!-- Alergias -->
+                        <div class="form-row">
+                            <div class="name">Alergias Alimentares</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <div class="p-t-10"> <!-- Ajuste no padding -->
+                                                <label class="radio-container m-r-55" style="margin-left: 15px;">Sim
+                                                    <input type="radio" name="food_allergies" value="sim"
+                                                        @if (old('food_allergies') === 'sim') checked @endif>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="radio-container" style="margin-left: 15px;">Não
+                                                    <input type="radio" name="food_allergies" value="nao"
+                                                        @if (old('food_allergies') === 'nao') checked @endif>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                            @error('food_allergies')
+                                                <div class="invalid-feedback d-block">{{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input
+                                                class="input--style-5 @error('allergies_description') is-invalid @enderror"
+                                                type="text" name="allergies_description"
+                                                value="{{ old('allergies_description') }}"
+                                                placeholder="Indique-as se precisar">
+                                            @error('allergies_description')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                      <!-- Telefone -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Telefone</label>
-                              <input type="text" name="phonenumber" id="phonenumber"
-                                  class="form-field @error('phonenumber') is-invalid @enderror"
-                                  value="{{ old('phonenumber') }}" placeholder="Telefone" required>
-                              @error('phonenumber')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
-                  </div>
+                        <!-- Autorização Imagem e Foto -->
+                        <div class="form-row" style="margin-bottom: 20px;">
+                            <!-- Ajuste no margin-bottom -->
+                            <div class="name">Imagem</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <div class="p-t-10"> <!-- Ajuste no padding -->
+                                                <label class="radio-container m-r-55" style="margin-left: 15px;">Sim
+                                                    <input type="radio" name="image_authorization" value="sim"
+                                                        @if (old('image_authorization') === 'sim') checked @endif>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="radio-container" style="margin-left: 15px;">Não
+                                                    <input type="radio" name="image_authorization" value="nao"
+                                                        @if (old('image_authorization') === 'nao') checked @endif>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                            @error('image_authorization')
+                                                <div class="invalid-feedback d-block">{{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <label for="formFile" class="btn btn--radius-2 btn--red"
+                                                style="cursor:pointer; display:block; width:100%; text-align:center;">
+                                                ESCOLHER FOTO
+                                            </label>
+                                            <input class="input--style-5 @error('photo') is-invalid @enderror"
+                                                type="file" name="photo" id="formFile" style="display:none;">
+                                            @error('photo')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- ...existing code... -->
+                                </div>
+                            </div>
+                        </div>
 
-                  <div class="row">
-                      <!-- Turma/Classe -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Turma</label>
-                              <input type="text" name="class" id="class"
-                                  class="form-field @error('class') is-invalid @enderror" value="{{ old('class') }}"
-                                  placeholder="Turma" required>
-                              @error('class')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
+                        <!-- Password -->
+                        <div class="form-row">
+                            <div class="name">Password</div>
+                            <div class="value">
+                                <div class="row row-space">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5 @error('password') is-invalid @enderror"
+                                                type="password" name="password" required
+                                                placeholder="Palavra-passe de 8 digitos">
+                                            @error('password')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            <input class="input--style-5" type="password"
+                                                name="password_confirmation" placeholder="Reescreva a palavra-passe">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                      <!-- Tamanho da T-shirt -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Tamanho da T-shirt</label>
-                              <select name="tshirt_size" id="tshirt_size"
-                                  class="select2 form-control @error('tshirt_size') is-invalid @enderror" required
-                                  style="width: 100%;">
-                                  <option value="" disabled {{ old('tshirt_size') ? '' : 'selected' }}>Selecione
-                                      o tamanho</option>
-                                  @foreach ($tshirt_sizes as $size)
-                                      <option value="{{ $size->tshirt_size }}"
-                                          @if (old('tshirt_size') == $size->tshirt_size) selected @endif>
-                                          {{ $size->tshirt_size }}
-                                      </option>
-                                  @endforeach
-                              </select>
-                              @error('tshirt_size')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
-                  </div>
+                        <div style="text-align: center; margin-top: 30px;">
+                            <button class="btn btn--radius-2 btn--red" type="submit">Registar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                  <!-- Alergias Alimentares (full width) -->
-                  <div class="row">
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Tem Alergias Alimentares?</label>
-                              <div class="radio-group">
-                                  <label class="radio-option">
-                                      <input type="radio" name="food_allergies" value="sim"
-                                          class="radio-input @error('food_allergies') is-invalid @enderror"
-                                          @if (old('food_allergies') === 'sim') checked @endif>
-                                      <span class="radio-text">Sim</span>
-                                  </label>
+    <script src="{{ asset('/assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('/assets/libs/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/select2_config.js') }}"></script>
+    <script src="{{ asset('/assets/js/fp_users.js') }}"></script>
+    <script src="{{ asset('/assets/js/global.js') }}"></script>
 
-                                  <label class="radio-option">
-                                      <input type="radio" name="food_allergies" value="nao"
-                                          class="radio-input @error('food_allergies') is-invalid @enderror"
-                                          @if (old('food_allergies') === 'nao') checked @endif>
-                                      <span class="radio-text">Não</span>
-                                  </label>
-                              </div>
-                              @error('food_allergies')
-                                  <div class="invalid-feedback d-block">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
+</body>
 
-                      <!-- Descrição das Alergias (full width) -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Descrição das Alergias</label>
-                              <input type="text" name="allergies_description"
-                                  class="form-field @error('allergies_description') is-invalid @enderror"
-                                  value="{{ old('allergies_description') }}" placeholder="Descrição das Alergias">
-                              @error('allergies_description')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="row"><!-- Autorização de Imagem -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Autorização de imagem?</label>
-                              <div class="radio-group">
-                                  <label class="radio-option">
-                                      <input type="radio" name="image_authorization" value="sim"
-                                          class="radio-input @error('image_authorization') is-invalid @enderror"
-                                          @if (old('image_authorization') === 'sim') checked @endif>
-                                      <span class="radio-text">Sim</span>
-                                  </label>
-
-                                  <label class="radio-option">
-                                      <input type="radio" name="image_authorization" value="nao"
-                                          class="radio-input @error('image_authorization') is-invalid @enderror"
-                                          @if (old('image_authorization') === 'nao') checked @endif>
-                                      <span class="radio-text">Não</span>
-                                  </label>
-                              </div>
-                              @error('image_authorization')
-                                  <div class="invalid-feedback d-block">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Foto</label>
-                              <input class="form-control @error('photo') is-invalid @enderror" type="file"
-                                  name="photo" id="formFile">
-                              @error('photo')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="row">
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Password</label>
-                              <input type="password" name="password" id="password"
-                                  class="form-field @error('password') is-invalid @enderror" placeholder="Password"
-                                  required>
-                              @error('password')
-                                  <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-                      </div>
-                      <!-- Confirmar Password -->
-                      <div class="form-group col-md-6">
-                          <div class="mb-3">
-                              <label class="form-label">Confirmar Password</label>
-                              <input type="password" name="password_confirmation" class="form-field"
-                                  placeholder="Confirmar Password" required>
-                          </div>
-                      </div>
-                  </div>
-
-                  <!-- Botão Submeter -->
-                  <div class="d-grid">
-                      <button type="submit" class="mt-3">Concluir</button>
-                  </div>
-              </form>
-          </div>
-      </div>
-      </div>
-      <script src="{{ asset('/assets/libs/jquery/jquery.min.js') }}"></script>
-      <script src="{{ asset('/assets/libs/select2/dist/js/select2.min.js') }}"></script>
-      <script src="{{ asset('/assets/js/select2_config.js') }}"></script>
-      <script src="{{ asset('/assets/js/register.js') }}"></script>
-      <script src="{{ asset('/assets/js/fp_users.js') }}"></script>
-      </div>
-  </body>
-
-  </html>
+</html>
