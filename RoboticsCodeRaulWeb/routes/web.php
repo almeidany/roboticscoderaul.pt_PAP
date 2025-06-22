@@ -10,7 +10,7 @@ Route::redirect('/', '/home');
 //Frontoffice
 Route::get('/home', [App\Http\Controllers\FrontController::class, 'index'])->name('home');
 Route::get('/sobre-nos', [App\Http\Controllers\FrontController::class, 'about_us'])->name('about_us');
-Route::get('/galeria', [App\Http\Controllers\FrontController::class, 'gallery'])->name('gallery');
+Route::get('/galeria/front', [App\Http\Controllers\GalleryFrontController::class, 'index'])->name('gallery.front');
 Route::get('/concursos', [App\Http\Controllers\FrontController::class, 'contests'])->name('contest');
 // Listar notícias frontoffice
 Route::get('/noticias/front', [App\Http\Controllers\NewsFrontController::class, 'index'])->name('news.front');
@@ -34,6 +34,15 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 });
+
+//gallery backoffice
+Route::get('/galeria', [App\Http\Controllers\GalleryController::class, 'index'])->name('gallery')->middleware('auth');
+Route::get('/galeria/adicionar-foto', [App\Http\Controllers\GalleryController::class, 'create'])->name('gallery.create')->middleware('auth');
+Route::post('/galeria', [App\Http\Controllers\GalleryController::class, 'store'])->name('gallery.store')->middleware('auth');
+//Route::get('/galeria/editar/{photo}', [App\Http\Controllers\GalleryController::class, 'edit'])->name('gallery')->middleware('auth');
+Route::put('/galeria/{photo}', [App\Http\Controllers\GalleryController::class, 'update'])->name('gallery.update')->middleware('auth');
+Route::delete('/galeria/{photo}', [App\Http\Controllers\GalleryController::class, 'destroy'])->name('gallery.destroy')->middleware('auth');
+
 
 //user
 Route::get('/utilizadores', [App\Http\Controllers\UserController::class, 'index'])->name('users')->middleware('auth');
@@ -69,6 +78,12 @@ Route::get('/rifas/consulta', [App\Http\Controllers\RafflesController::class, 'i
 Route::post('/rifas', [App\Http\Controllers\RafflesController::class, 'store'])->name('raffles.store')->middleware('auth');
 Route::put('/rifas/{raffles}', [App\Http\Controllers\RafflesController::class, 'update'])->name('raffles.update')->middleware('auth');
 Route::put('/users/{id}/raffles', [App\Http\Controllers\UserController::class, 'updateRaffles'])->name('users.updateRaffles')->middleware('auth');
+
+//palmares
+Route::get('/palmares', [App\Http\Controllers\PalmaresController::class, 'index'])->name('palmares')->middleware('auth');
+Route::get('/palmares/adicionar', [App\Http\Controllers\PalmaresController::class, 'create'])->name('palmares.create')->middleware('auth');
+Route::post('/palmares', [App\Http\Controllers\PalmaresController::class, 'store'])->name('palmares.store')->middleware('auth');
+Route::delete('/palmares/{palmares}', [App\Http\Controllers\PalmaresController::class, 'destroy'])->name('palmares.destroy')->middleware('auth');
 
 //sponser
 Route::get('/patrocinadores', [App\Http\Controllers\SponserController::class, 'index'])->name('sponsers')->middleware('auth');

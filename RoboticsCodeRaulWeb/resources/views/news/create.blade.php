@@ -83,6 +83,7 @@
                                     <button type="submit" class="btn btn-primary">Publicar Noticia</button>
                                     <a href="{{ route('news') }}" class="btn btn-danger ms-2">Cancelar</a>
                                 </div>
+                            </div>
                     </form>
                 </div>
             </div>

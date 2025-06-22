@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
-@include('layouts.backoffice.news.head')
+@include('layouts.backoffice.gallery.head')
 
 <body>
     <div id="main-wrapper">
@@ -17,35 +17,30 @@
             <div class="body-wrapper">
                 <div class="container-fluid">
 
-                    <form action="{{ route('sponsers.store') }}" enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('gallery.store') }}" enctype="multipart/form-data" method="POST"
+                        style="align-items: center; margin: 0 auto; justify-content: center; width: 80%;">
                         @csrf
                         <div class="card">
                             <div class="card-header text-bg-primary">
-                                <h4 class="mb-0 text-white text-center">Adicionar Patrocionador</h4>
+                                <h4 class="mb-0 text-white text-center">Adicionar Fotografia</h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="row mb-3">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Carregar Fotografia</label>
-                                            <input class="form-control @error('photo') is-invalid @enderror"
-                                                type="file" id="formFile" name="photo">
-                                            @if (isset($sponsers) && $sponsers->photo)
-                                                <img src="{{ asset('storage/images/sponsers/' . $sponsers->photo) }}"
+                                            <input class="form-control" type="file" id="formFile" name="photo">
+                                            @if (isset($photo) && $photo->photo)
+                                                <img src="{{ asset('storage/images/gallery/' . $news->photo) }}"
                                                     width="100" class="mt-2">
                                             @endif
-                                            @error('photo')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Empresa</label>
-                                            <input type="text" name="enterprise_name"
-                                                class="form-control @error('enterprise_name') is-invalid @enderror"
-                                                value="{{ old('enterprise_name') }}">
-                                            @error('enterprise_name')
+                                            <label class="form-label">Título</label>
+                                            <input type="text" name="title"
+                                                class="form-control @error('title') is-invalid @enderror"
+                                                value="{{ old('title') }}">
+                                            @error('title')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -53,36 +48,47 @@
                                         </div>
                                     </div>
 
-                                    <label class="form-label">Descrição</label>
-                                    <textarea id="summernote" name="designation" class="form-control @error('designation') is-invalid @enderror">{{ old('designation') }}</textarea>
-                                    @error('designation')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+                                    <!-- filepath: c:\Users\tiaguitosgamer\Documents\roboticscoderaul.pt_PAP\RoboticsCodeRaulWeb\resources\views\gallery\create.blade.php -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Concurso</label>
+                                                <select class="select2 form-control" id="palmares" name="year">
+                                                    <option value="" disabled>Selecione o concurso correspondente
+                                                    </option>
+                                                    @foreach ($palmares as $conests)
+                                                        <option value="{{ $conests->id }}">{{ $conests->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    @enderror
-
-                                    <div class="row pt-3 justify-content-center" style="text-align: center;">
-                                        <div class="col-md-4 d-flex flex-column align-items-center">
-                                            <div class="mb-3 w-100">
-                                                <label class="form-label">Link</label>
-                                                <div class="form-group w-100">
-                                                    <input type="text" name="link"
-                                                        class="form-control @error('link') is-invalid @enderror"
-                                                        style="width: 100%; text-align: center;"
-                                                        value="{{ old('link') }}">
-                                                    @error('link')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Ano</label>
+                                                <select class="select2 form-control" id="year" name="year">
+                                                    <option value="" disabled>Selecione o ano</option>
+                                                    @php
+                                                        $year_end = date('2100');
+                                                        for (
+                                                            $year_start = 2023;
+                                                            $year_start <= $year_end;
+                                                            $year_start++
+                                                        ) {
+                                                            echo "<option value=\"$year_start\">$year_start</option>";
+                                                        }
+                                                    @endphp
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-actions text-center mt-2" style="margin-bottom: 50px;">
-                                        <button type="submit" class="btn btn-primary">Adicionar Patrocinador</button>
-                                        <a href="{{ route('sponsers') }}" class="btn btn-danger ms-2">Cancelar</a>
+                                        <button type="submit" class="btn btn-primary">Adicionar Fotografia</button>
+                                        <a href="{{ route('gallery') }}" class="btn btn-danger ms-2">Cancelar</a>
                                     </div>
+                                </div>
+                            </div>
                     </form>
                 </div>
             </div>
@@ -113,33 +119,8 @@
     <script src="{{ asset('assets/js/dashboards/dashboard.js') }}"></script>
     <!-- jQuery primeiro -->
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
-
-    <!-- Depois Summernote -->
-    <script src="{{ asset('assets/js/summernote/summernote-lite.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summenote/summernote-pt-PT.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summenote/summernote-ext-databasic.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summenote/summernote-ext-hello.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summenote/summernote-ext-specialchars.min.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                placeholder: 'Escreva a sua notícia...',
-                tabsize: 2,
-                height: 300,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ],
-                lang: 'pt-PT'
-            });
-        });
-    </script>
+    <script src="{{ asset('/assets/libs/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/select2_config.js') }}"></script>
 </body>
 
 </html>

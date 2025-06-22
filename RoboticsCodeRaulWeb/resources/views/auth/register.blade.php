@@ -151,12 +151,12 @@
                                     <div class="col-2">
                                         <div class="input-group-desc">
                                             <div class="p-t-10"> <!-- Ajuste no padding -->
-                                                <label class="radio-container m-r-55" style="margin-left: 15px;">Sim
+                                                <label class="radio-container m-r-55" style="margin-left: 45px;">Sim
                                                     <input type="radio" name="food_allergies" value="sim"
                                                         @if (old('food_allergies') === 'sim') checked @endif>
                                                     <span class="checkmark"></span>
                                                 </label>
-                                                <label class="radio-container" style="margin-left: 15px;">Não
+                                                <label class="radio-container" style="margin-left: 45px;">Não
                                                     <input type="radio" name="food_allergies" value="nao"
                                                         @if (old('food_allergies') === 'nao') checked @endif>
                                                     <span class="checkmark"></span>
@@ -193,12 +193,12 @@
                                     <div class="col-2">
                                         <div class="input-group-desc">
                                             <div class="p-t-10"> <!-- Ajuste no padding -->
-                                                <label class="radio-container m-r-55" style="margin-left: 15px;">Sim
+                                                <label class="radio-container m-r-55" style="margin-left: 45px;">Sim
                                                     <input type="radio" name="image_authorization" value="sim"
                                                         @if (old('image_authorization') === 'sim') checked @endif>
                                                     <span class="checkmark"></span>
                                                 </label>
-                                                <label class="radio-container" style="margin-left: 15px;">Não
+                                                <label class="radio-container" style="margin-left: 45px;">Não
                                                     <input type="radio" name="image_authorization" value="nao"
                                                         @if (old('image_authorization') === 'nao') checked @endif>
                                                     <span class="checkmark"></span>

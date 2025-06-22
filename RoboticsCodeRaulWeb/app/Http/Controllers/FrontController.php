@@ -24,10 +24,4 @@ class FrontController extends Controller
         $sponsers = Sponser::all();
         return view('home.index', compact('sponsers'));
     }
-
-    public function gallery()
-    {
-        //
-        return view('home.gallery');
-    }
 }

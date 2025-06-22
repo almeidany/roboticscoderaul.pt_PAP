@@ -1,0 +1,45 @@
+/* Montserrat */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('{{ asset("assets/fonts/Montserrat-Regular.tif") }}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('{{ asset("assets/fonts/Montserrat-Bold.tif") }}') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Poppins */
+@font-face {
+    font-family: 'Poppins';
+    src: url('{{ asset("assets/fonts/Poppins-Regular.tif") }}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('{{ asset("assets/fonts/Poppins-Bold.tif") }}') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Aplique as fontes ao corpo do documento */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.login100-form-title {
+    font-family: 'Montserrat', sans-serif;
+}
+
+@font-face {
+    font-family: 'A Montserrat';
+    src: url('{{ asset("assets/fonts/A Montserrat-Regular.ttf") }}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

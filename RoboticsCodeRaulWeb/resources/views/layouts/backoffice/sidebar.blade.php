@@ -25,6 +25,12 @@
                         </span>
                         <span class="hide-menu">Acessos</span>
                     </a>
+                    <a class="sidebar-link" href="{{ route('gallery') }}" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="bi bi-archive"></i>
+                        </span>
+                        <span class="hide-menu">Galeria</span>
+                    </a>
                     <a class="sidebar-link" href="{{ route('home') }}" aria-expanded="false" target="_blank">
                         <span class="d-flex">
                             <i class="bi bi-house-door"></i>
@@ -56,6 +62,12 @@
                             <i class="bi bi-pin-angle"></i>
                         </span>
                         <span class="hide-menu">Página Inicial</span>
+                    </a>
+                    <a class="sidebar-link" href="{{ route('palmares') }}" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="bi bi-award"></i>
+                        </span>
+                        <span class="hide-menu">Palmares</span>
                     </a>
                     <a class="sidebar-link" href="{{ route('sponsers') }}" aria-expanded="false">
                         <span class="d-flex">
