@@ -34,13 +34,13 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10024',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:10024',
             'title' => 'required|string|max:255',
             'palmares' => 'required|string|max:255',
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
+            'year' => 'required|integer',
         ]);
 
-        $gallery = new Gallery();
+        $photo = new Gallery();
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
@@ -48,15 +48,16 @@ class GalleryController extends Controller
             $title = preg_replace('/[^A-Za-z0-9\-]/', '', $request->input('title'));
             $name = $title . '_' . time() . '.' . $extension;
             $path = $file->storeAs('public/images/gallery', $name);
-            $gallery->photo = $name;
+            $photo->photo = $name;
         }
 
-        $gallery->title = $request->input('title');
-        $gallery->palmares = $request->input('palmares');
-        $gallery->year = $request->input('year');
-        $gallery->save();
+        $photo->title = $request->input('title');
+        $photo->palmares = $request->input('palmares');
+        $photo->year = $request->input('year');
+        //log de debug dd;
+        $photo->save();
 
-        return redirect()->route('gallery.index')->with('success', 'Fotografia adicionada com sucesso!');
+        return redirect()->route('gallery')->with('message', 'Fotografia adicionada com sucesso!');
     }
 
     /**

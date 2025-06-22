@@ -29,9 +29,15 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Carregar Fotografia</label>
-                                            <input class="form-control" type="file" id="formFile" name="photo">
+                                            <input class="form-control @error('photo') is-invalid @enderror"
+                                                type="file" id="formFile" name="photo">
+                                            @error('photo')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                             @if (isset($photo) && $photo->photo)
-                                                <img src="{{ asset('storage/images/gallery/' . $news->photo) }}"
+                                                <img src="{{ asset('storage/images/gallery/' . $photo->photo) }}"
                                                     width="100" class="mt-2">
                                             @endif
                                         </div>
@@ -48,37 +54,46 @@
                                         </div>
                                     </div>
 
-                                    <!-- filepath: c:\Users\tiaguitosgamer\Documents\roboticscoderaul.pt_PAP\RoboticsCodeRaulWeb\resources\views\gallery\create.blade.php -->
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Concurso</label>
-                                                <select class="select2 form-control" id="palmares" name="year">
-                                                    <option value="" disabled>Selecione o concurso correspondente
-                                                    </option>
-                                                    @foreach ($palmares as $conests)
-                                                        <option value="{{ $conests->id }}">{{ $conests->name }}
+                                                <select
+                                                    class="select2 form-control @error('palmares') is-invalid @enderror"
+                                                    id="palmares" name="palmares">
+                                                    <option value="" disabled selected>Selecione o concurso
+                                                        correspondente</option>
+                                                    @foreach ($palmares as $contest)
+                                                        <option value="{{ $contest->name }}"
+                                                            {{ old('palmares') == $contest->name ? 'selected' : '' }}>
+                                                            {{ $contest->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                @error('palmares')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Ano</label>
-                                                <select class="select2 form-control" id="year" name="year">
-                                                    <option value="" disabled>Selecione o ano</option>
-                                                    @php
-                                                        $year_end = date('2100');
-                                                        for (
-                                                            $year_start = 2023;
-                                                            $year_start <= $year_end;
-                                                            $year_start++
-                                                        ) {
-                                                            echo "<option value=\"$year_start\">$year_start</option>";
-                                                        }
-                                                    @endphp
+                                                <select class="select2 form-control @error('year') is-invalid @enderror"
+                                                    id="year" name="year">
+                                                    <option value="" disabled selected>Selecione o ano</option>
+                                                    @for ($year = 2022; $year <= 2200; $year++)
+                                                        <option value="{{ $year }}"
+                                                            {{ old('year') == $year ? 'selected' : '' }}>
+                                                            {{ $year }}</option>
+                                                    @endfor
                                                 </select>
+                                                @error('year')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
