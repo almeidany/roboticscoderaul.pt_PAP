@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
-@include('layouts.backoffice.projects.head')
+@include('layouts.backoffice.palmares.head')
 
 <body>
     <div id="main-wrapper">
@@ -26,17 +26,72 @@
                             <form action="{{ route('palmares.store') }}" enctype="multipart/form-data" method="POST">
                                 @csrf
                                 <div class="row pt-3">
-                                    <div class="col-md-6">
+                                    <!-- Ano (Select2) -->
+                                    <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label">Nome do Concurso</label>
-                                            <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror"
-                                                value="{{ old('name') }}" required>
-                                            @error('name')
+                                            <label class="form-label">Ano</label>
+                                            <select name="year"
+                                                class="form-select select2 @error('year') is-invalid @enderror"
+                                                required>
+                                                <option value="">Selecione o ano</option>
+                                                @for ($i = now()->year; $i >= 2000; $i--)
+                                                    <option value="{{ $i }}"
+                                                        {{ old('year') == $i ? 'selected' : '' }}>{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                            @error('year')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <!-- Nome do Concurso (Select2) -->
+                                    <div class="col-md-9">
+                                        <div class="mb-3">
+                                            <label class="form-label">Nome do Concurso</label>
+                                            <select name="contest_name"
+                                                class="form-select select2 @error('contest_name') is-invalid @enderror"
+                                                required>
+                                                <option value="">Selecione o concurso</option>
+                                                @foreach ($contests as $contest)
+                                                    <option value="{{ $contest->name }}"
+                                                        {{ old('contest_name') == $contest->name ? 'selected' : '' }}>
+                                                        {{ $contest->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('contest_name')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Fases</label>
+                                        <div id="fases-container">
+                                            <div class="row align-items-end fase-group mb-2">
+                                                <div class="col-md-4">
+                                                    <input type="text" name="phase_name[]" class="form-control"
+                                                        placeholder="Nome da Fase" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="team_name[]" class="form-control"
+                                                        placeholder="Nome da Equipa" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" name="place[]" class="form-control"
+                                                        placeholder="Colocação" required>
+                                                </div>
+                                                <div class="col-md-1 text-end">
+                                                    <button type="button" class="btn btn-add btn-sm"
+                                                        onclick="adicionarFase()">＋</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botões -->
                                     <div class="form-actions text-center mt-4">
                                         <button type="submit" class="btn btn-primary">Adicionar Concurso</button>
                                         <a href="{{ route('palmares') }}" class="btn btn-danger ms-2">Cancelar</a>
@@ -74,6 +129,7 @@
     <script src="{{ asset('/assets/libs/jquery/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/assets/libs/select2/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('/assets/js/select2_config.js') }}"></script>
+    <script src="{{ asset('/assets/js/row_palmares.js') }}"></script>
 </body>
 
 </html>

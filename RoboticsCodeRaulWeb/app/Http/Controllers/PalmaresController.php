@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Palmares;
+use App\Models\Contest;
 use Illuminate\Http\Request;
 
 class PalmaresController extends Controller
@@ -23,7 +24,8 @@ class PalmaresController extends Controller
     public function create()
     {
         //
-        return view('palmares.create');
+        $contests = Contest::all();
+        return view('palmares.create', compact('contests'));
     }
 
     /**
@@ -31,15 +33,25 @@ class PalmaresController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
-            'name' => 'required|string|max:255|unique:palmares,name',
+            'year' => 'required|integer',
+            'contest_name' => 'required|string',
+            'phase_name' => 'required|array',
+            'team_name' => 'required|array',
+            'place' => 'required|array',
         ]);
 
-        $palmares = new Palmares();
-        $palmares->name = $request->name;
-        $palmares->save();
-        return redirect()->route('palmares')->with('message', 'Concurso adicionado com sucesso!');
+        foreach ($request->phase_name as $index => $phase) {
+            $palmares = new Palmares();
+            $palmares->year = $request->input('year');
+            $palmares->contest_name = $request->input('contest_name');
+            $palmares->phase_name = $phase;
+            $palmares->team_name = $request->team_name[$index];
+            $palmares->place = $request->place[$index];
+            $palmares->save();
+        }
+
+        return redirect()->route('palmares')->with('message', 'Palmarés criado com sucesso.');
     }
 
     /**
@@ -72,7 +84,5 @@ class PalmaresController extends Controller
     public function destroy(Palmares $palmares)
     {
         //
-        $palmares->delete();
-        return redirect()->route('palmares')->with('message', 'Concurso removido com sucesso!');
     }
 }

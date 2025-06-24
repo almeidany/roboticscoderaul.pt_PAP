@@ -12,7 +12,7 @@ class FrontController extends Controller
         return view('home.about_us');
     }
 
-    public function contests()
+    public function contest()
     {
         //
         return view('home.contests');

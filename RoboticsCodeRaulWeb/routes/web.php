@@ -11,7 +11,7 @@ Route::redirect('/', '/home');
 Route::get('/home', [App\Http\Controllers\FrontController::class, 'index'])->name('home');
 Route::get('/sobre-nos', [App\Http\Controllers\FrontController::class, 'about_us'])->name('about_us');
 Route::get('/galeria/front', [App\Http\Controllers\GalleryFrontController::class, 'index'])->name('gallery.front');
-Route::get('/concursos', [App\Http\Controllers\FrontController::class, 'contests'])->name('contest');
+Route::get('/concursos/front', [App\Http\Controllers\FrontController::class, 'contest'])->name('contest');
 // Listar notícias frontoffice
 Route::get('/noticias/front', [App\Http\Controllers\NewsFrontController::class, 'index'])->name('news.front');
 Route::get('/noticias/front/{news}', [App\Http\Controllers\NewsFrontController::class, 'show'])->name('news.front.show');
@@ -84,6 +84,12 @@ Route::get('/palmares', [App\Http\Controllers\PalmaresController::class, 'index'
 Route::get('/palmares/adicionar', [App\Http\Controllers\PalmaresController::class, 'create'])->name('palmares.create')->middleware('auth');
 Route::post('/palmares', [App\Http\Controllers\PalmaresController::class, 'store'])->name('palmares.store')->middleware('auth');
 Route::delete('/palmares/{palmares}', [App\Http\Controllers\PalmaresController::class, 'destroy'])->name('palmares.destroy')->middleware('auth');
+
+//contests
+Route::get('/concursos', [App\Http\Controllers\ContestController::class, 'index'])->name('contests')->middleware('auth');
+Route::get('/concursos/adicionar-concurso', [App\Http\Controllers\ContestController::class, 'create'])->name('contests.create')->middleware('auth');
+Route::post('/concursos', [App\Http\Controllers\ContestController::class, 'store'])->name('contests.store')->middleware('auth');
+Route::delete('/concursos/{contest}', [App\Http\Controllers\ContestController::class, 'destroy'])->name('contests.destroy')->middleware('auth');
 
 //sponser
 Route::get('/patrocinadores', [App\Http\Controllers\SponserController::class, 'index'])->name('sponsers')->middleware('auth');

@@ -25,6 +25,12 @@
                         </span>
                         <span class="hide-menu">Acessos</span>
                     </a>
+                    <a class="sidebar-link" href="{{ route('contests') }}" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="bi bi-book"></i>
+                        </span>
+                        <span class="hide-menu">Concursos</span>
+                    </a>
                     <a class="sidebar-link" href="{{ route('gallery') }}" aria-expanded="false">
                         <span class="d-flex">
                             <i class="bi bi-archive"></i>
