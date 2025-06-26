@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\project_user;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -21,11 +22,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $categories = array(
-            "OEI" => "Objetos e Espaços Inteligentes",
-            "TRL" => "Tema Livre",
-            "VR" => "Veículos Robóticos",
-        );
+        $categories = Categories::all();
         $user = User::all();
         return view('projects.create', compact('categories', 'user'));
     }
@@ -59,7 +56,7 @@ class ProjectController extends Controller
             $extension = $file->getClientOriginalExtension();
             $title = preg_replace('/[^A-Za-z0-9\-]/', '', $request->input('projectname'));
             $name = $project->projectname . '_' . time() . '.' . $extension;
-            $path = $file->storeAs('public/images/projects', $name);
+            $path = $file->storeAs('images/projects', $name);
             $project->photo = $name;
         };
         $project->description = $request->input('description');
@@ -80,11 +77,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $categories = array(
-            "OEI" => "Objetos e Espaços Inteligentes",
-            "TRL" => "Tema Livre",
-            "VR" => "Veículos Robóticos",
-        );
+        $caegories = Categories::all();
 
         $project_users = user::select('users.*')
             ->join('project_users', 'project_users.user_id', '=', 'users.id')
@@ -102,11 +95,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         //
-        $categories = array(
-            "OEI" => "Objetos e Espaços Inteligentes",
-            "TRL" => "Tema Livre",
-            "VR" => "Veículos Robóticos",
-        );
+        $caegories = Categories::all();
 
         $project_users = user::select('users.*')
             ->join('project_users', 'project_users.user_id', '=', 'users.id')
@@ -147,7 +136,7 @@ class ProjectController extends Controller
             $extension = $file->getClientOriginalExtension();
             $title = preg_replace('/[^A-Za-z0-9\-]/', '', $request->input('projectname'));
             $name = $project->projectname . '_' . time() . '.' . $extension;
-            $path = $file->storeAs('public/images/projects', $name);
+            $path = $file->storeAs('images/projects', $name);
             $project->photo = $name;
         };
 

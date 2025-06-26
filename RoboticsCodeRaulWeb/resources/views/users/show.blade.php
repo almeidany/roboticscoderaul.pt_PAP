@@ -31,20 +31,14 @@
                                         <div class="mb-3">
                                             <label class="form-label">Primeiro Nome <span
                                                     class="text-danger"></span></label>
-                                            <input type="text" name="first_name"
-                                                class="form-control @error('first_name') is-invalid @enderror"
-                                                value="{{ old('first_name', $user->first_name) }}" @readonly(true)
-                                                @disable(true)>
+                                            <div class="form-control-plaintext">{{ $user->first_name }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Último Nome <span
                                                     class="text-danger"></span></label>
-                                            <input type="text" name="last_name"
-                                                class="form-control @error('last_name') is-invalid @enderror"
-                                                value="{{ old('last_name', $user->last_name) }}" @readonly(true)
-                                                @disable(true)>
+                                            <div class="form-control-plaintext">{{ $user->last_name }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -54,20 +48,14 @@
                                         <div class="mb-3">
                                             <label class="form-label">Número de Processo <span
                                                     class="text-danger"></span></label>
-                                            <input type="text" name="schoolnumber"
-                                                class="form-control @error('schoolnumber') is-invalid @enderror"
-                                                value="{{ old('schoolnumber', $user->schoolnumber) }}" @readonly(true)
-                                                @disable(true)>
+                                            <div class="form-control-plaintext">{{ $user->schoolnumber }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Data de Nascimento <span
                                                     class="text-danger"></span></label>
-                                            <input type="date" name="birth_date"
-                                                class="form-control @error('birth_date') is-invalid @enderror"
-                                                value="{{ old('birth_date', $user->birth_date) }}" @readonly(true)
-                                                @disable(true)>
+                                            <div class="form-control-plaintext">{{ $user->birth_date }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -76,20 +64,14 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Email <span class="text-danger"></span></label>
-                                            <input type="email" name="email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                value="{{ old('email', $user->email) }}" @readonly(true)
-                                                @disable(true)>
+                                            <div class="form-control-plaintext">{{ $user->email }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Número de Telefone <span
                                                     class="text-danger"></span></label>
-                                            <input type="tel" name="phonenumber"
-                                                class="form-control @error('phonenumber') is-invalid @enderror"
-                                                value="{{ old('phonenumber', $user->phonenumber) }}" @readonly(true)
-                                                @disable(true)>
+                                            <div class="form-control-plaintext">{{ $user->phonenumber }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -98,9 +80,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Turma <span class="text-danger"></span></label>
-                                            <input type="text" name="class"
-                                                class="form-control @error('class') is-invalid @enderror"
-                                                value="{{ old('class', $user->class) }}" readonly>
+                                            <div class="form-control-plaintext">{{ $user->class }}</div>
                                         </div>
                                     </div>
                                     <!-- Campo para Tamanho da T-shirt -->
@@ -108,9 +88,7 @@
                                         <div class="mb-3">
                                             <label class="form-label">Tamanho da T-shirt <span
                                                     class="text-danger"></span></label>
-                                            <input type="text" name="tshirt_size"
-                                                class="form-control @error('tshirt_size') is-invalid @enderror"
-                                                value="{{ old('tshirt_size', $user->tshirt_size) }}" readonly>
+                                            <div class="form-control-plaintext">{{ $user->tshirt_size }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -120,21 +98,8 @@
                                         <div class="mb-3">
                                             <label class="form-label">Tenho autorização de imagem? <span
                                                     class="text-danger"></span></label>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check me-3">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="image_authorization" id="authSim" value="sim"
-                                                        @checked(old('image_authorization', $user->image_authorization) === 'sim') @readonly(true)
-                                                        @disable(true)>
-                                                    <label class="form-check-label" for="authSim">Sim</label>
-                                                </div>
-                                                <div class="form-check me-3">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="image_authorization" id="authNao" value="nao"
-                                                        @checked(old('image_authorization', $user->image_authorization) === 'nao') @readonly(true)
-                                                        @disable(true)>
-                                                    <label class="form-check-label" for="authNao">Não</label>
-                                                </div>
+                                            <div class="form-control-plaintext">
+                                                {{ $user->image_authorization === 'sim' ? 'Sim' : 'Não' }}
                                             </div>
                                         </div>
                                     </div>
@@ -142,21 +107,8 @@
                                         <div class="mb-3">
                                             <label class="form-label">Alergias Alimentares <span
                                                     class="text-danger"></span></label>
-                                            <div class="d-flex align-items-center">
-                                                <div class="form-check me-3">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="food_allergies" id="alergiasSim" value="sim"
-                                                        {{ old('food_allergies', $user->food_allergies) === 'sim' ? 'checked' : '' }}
-                                                        @readonly(true) @disable(true)>
-                                                    <label class="form-check-label" for="alergiasSim">Sim</label>
-                                                </div>
-                                                <div class="form-check me-3">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="food_allergies" id="alergiasNao" value="nao"
-                                                        {{ old('food_allergies', $user->food_allergies) === 'nao' ? 'checked' : '' }}
-                                                        @readonly(true) @disable(true)>
-                                                    <label class="form-check-label" for="alergiasNao">Não</label>
-                                                </div>
+                                            <div class="form-control-plaintext">
+                                                {{ $user->food_allergies === 'sim' ? 'Sim' : 'Não' }}
                                             </div>
                                         </div>
                                     </div>
@@ -166,8 +118,8 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">Se sim, indique as alergias aqui</label>
-                                            <textarea class="form-control @error('allergies_description') is-invalid @enderror" name="allergies_description"
-                                                rows="3" @readonly(true) @disable(true)>{{ old('allergies_description', $user->allergies_description) }}</textarea>
+                                            <div class="form-control-plaintext">{{ $user->allergies_description }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

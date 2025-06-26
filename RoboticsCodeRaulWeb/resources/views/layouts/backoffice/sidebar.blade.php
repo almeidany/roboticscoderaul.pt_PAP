@@ -93,6 +93,12 @@
                         </span>
                         <span class="hide-menu">Rifas</span>
                     </a>
+                    <a class="sidebar-link" href="{{ route('classes') }}" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="bi bi-person-video3"></i>
+                        </span>
+                        <span class="hide-menu">Turmas</span>
+                    </a>
                 </li>
             </ul>
         </nav>

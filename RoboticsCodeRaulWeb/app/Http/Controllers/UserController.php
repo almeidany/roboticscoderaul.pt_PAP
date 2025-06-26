@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // Certifique-se de que o modelo User está no namespace correto
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use App\Models\tshirts;
+use App\Models\Classes;
 
 class UserController extends Controller
 {
@@ -28,7 +29,7 @@ class UserController extends Controller
             'schoolnumber' => 'required|integer|unique:users,schoolnumber',
             'birth_date' => 'required|date',
             'phonenumber' => 'required|integer|unique:users,phonenumber',
-            'class' => 'required|string|max:10',
+            'class' => 'required|string|max:25',
             'tshirt_size' => 'required|string|max:3',
             'food_allergies' => 'required|in:sim,nao',
             'image_authorization' => 'required|in:sim,nao',
@@ -56,7 +57,8 @@ class UserController extends Controller
         // Aqui você pode buscar o usuário pelo ID e passá-lo para a view de edição
         $user = User::findOrFail($id);
         $tshirt_sizes = Tshirts::all();
-        return view('users.edit', compact('user', 'tshirt_sizes'));
+        $classes = Classes::all();
+        return view('users.edit', compact('user', 'tshirt_sizes', 'classes'));
     }
 
     public function update(Request $request, $id)

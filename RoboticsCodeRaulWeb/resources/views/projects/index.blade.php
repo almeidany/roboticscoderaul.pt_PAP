@@ -43,7 +43,6 @@
                                                 <td class="px-0">
                                                     <div class="d-flex align-items-center justify-content-center">
                                                         @if ($project->photo)
-                                                            <!-- Verifique se o campo se chama 'photo' ou 'foto' -->
                                                             <img src="{{ asset('storage/images/projects/' . $project->photo) }}"
                                                                 class="rounded-circle" width="35"
                                                                 alt="{{ $project->projectname }}" />

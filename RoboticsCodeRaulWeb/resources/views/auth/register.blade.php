@@ -120,9 +120,18 @@
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5 @error('class') is-invalid @enderror"
-                                                type="text" name="class" value="{{ old('class') }}"
-                                                placeholder="Turma">
+                                            <div class="rs-select2 js-select-simple select--no-search"
+                                                style="margin-top: 20px;">
+                                                <select name="class" class="select2" required>
+                                                    <option disabled selected>Turma</option>
+                                                    @foreach ($classes as $class)
+                                                        <option value="{{ $class->class_year . $class->class }}"
+                                                            {{ old('class') == $class->class_year . $class->class ? 'selected' : '' }}>
+                                                            {{ $class->class_year . $class->class }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             @error('class')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Tshirts;
+use App\Models\Categories;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,15 @@ class AppServiceProvider extends ServiceProvider
 
         foreach ($sizes as $size) {
             Tshirts::firstOrCreate(['tshirt_size' => $size]);
+        }
+
+        $categories = [
+            "Objetos e Espaços Inteligentes",
+            "Tema Livre",
+            "Veículos Robóticos"
+        ];
+        foreach ($categories as $category) {
+            Categories::firstOrCreate(['category' => $category]);
         }
     }
 }

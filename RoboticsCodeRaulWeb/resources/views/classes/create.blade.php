@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
-@include('layouts.backoffice.palmares.head')
+@include('layouts.backoffice.classes.head')
 
 <body>
     <div id="main-wrapper">
@@ -19,73 +19,45 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header text-bg-primary">
-                            <h4 class="mb-0 text-white text-center">Adicionar Classificação Palmares</h4>
+                            <h4 class="mb-0 text-white text-center">Adicionar Turma</h4>
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('palmares.store') }}" enctype="multipart/form-data" method="POST">
+                            <form action="{{ route('classes.store') }}" enctype="multipart/form-data" method="POST">
                                 @csrf
                                 <div class="row pt-3">
                                     <!-- Ano (Select2) -->
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label class="form-label">Ano</label>
-                                            <select name="year"
-                                                class="form-select select2 @error('year') is-invalid @enderror"
+                                            <label class="form-label">Ano Escolar</label>
+                                            <select name="class_year"
+                                                class="form-select select2 @error('class_year') is-invalid @enderror"
                                                 required>
                                                 <option value="">Selecione o ano</option>
-                                                @for ($i = now()->year; $i >= 2020; $i--)
+                                                @for ($i = 12; $i >= 0; $i--)
                                                     <option value="{{ $i }}"
-                                                        {{ old('year') == $i ? 'selected' : '' }}>{{ $i }}
-                                                    </option>
+                                                        {{ old('class_year') == $i ? 'selected' : '' }}>
+                                                        {{ $i }}</option>
                                                 @endfor
                                             </select>
-                                            @error('year')
+                                            @error('class_year')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
-                                    <!-- Nome do Concurso (Select2) -->
-                                    <div class="col-md-9">
-                                        <div class="mb-3">
-                                            <label class="form-label">Nome do Concurso</label>
-                                            <select name="contest_name"
-                                                class="form-select select2 @error('contest_name') is-invalid @enderror"
-                                                required>
-                                                <option value="">Selecione o concurso</option>
-                                                @foreach ($contests as $contest)
-                                                    <option value="{{ $contest->name }}"
-                                                        {{ old('contest_name') == $contest->name ? 'selected' : '' }}>
-                                                        {{ $contest->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @error('contest_name')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
+                                    <!-- Container das turmas -->
                                     <div class="col-12">
-                                        <label class="form-label">Fases</label>
-                                        <div id="fases-container">
-                                            <div class="row align-items-end fase-group mb-2">
-                                                <div class="col-md-4">
-                                                    <input type="text" name="phase_name[]" class="form-control"
-                                                        placeholder="Nome da Fase" required>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" name="team_name[]" class="form-control"
-                                                        placeholder="Nome da Equipa" required>
-                                                </div>
+                                        <label class="form-label">Turmas</label>
+                                        <div id="turmas-container">
+                                            <div class="row align-items-end turma-group mb-2">
                                                 <div class="col-md-3">
-                                                    <input type="text" name="place[]" class="form-control"
-                                                        placeholder="Colocação" required>
+                                                    <input type="text" name="class[]" class="form-control"
+                                                        placeholder="Letra da Turma" required>
                                                 </div>
                                                 <div class="col-md-1 text-end">
                                                     <button type="button" class="btn btn-add btn-sm"
-                                                        onclick="adicionarFase()">＋</button>
+                                                        onclick="adicionarTurma()">＋</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,11 +65,12 @@
 
                                     <!-- Botões -->
                                     <div class="form-actions text-center mt-4">
-                                        <button type="submit" class="btn btn-primary">Adicionar Concurso</button>
-                                        <a href="{{ route('palmares') }}" class="btn btn-danger ms-2">Cancelar</a>
+                                        <button type="submit" class="btn btn-primary">Adicionar Turma</button>
+                                        <a href="{{ route('classes.create') }}" class="btn btn-danger ms-2">Cancelar</a>
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -129,7 +102,7 @@
     <script src="{{ asset('/assets/libs/jquery/js/jquery.min.js') }}"></script>
     <script src="{{ asset('/assets/libs/select2/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('/assets/js/select2_config.js') }}"></script>
-    <script src="{{ asset('/assets/js/row_palmares.js') }}"></script>
+    <script src="{{ asset('/assets/js/row_classes.js') }}"></script>
 </body>
 
 </html>

@@ -27,52 +27,30 @@
                             @endif
                             <div class="table-responsive">
                                 <table id="zero_config" class="table table-striped table-bordered text-center">
-                                    <h4 class="card-title">Lista do Palmares</h4>
+                                    <h4 class="card-title">Lista das Turmas</h4>
                                     <thead>
                                         <tr>
+                                            <th scope="col" class="px-0 text-muted text-center">Turma</th>
                                             <th scope="col" class="px-0 text-muted text-center">Ano</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Nome do Concurso</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Nome da fase</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Nome da equipa</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Posição</th>
                                             <th scope="col" class="px-0 text-muted text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($palmares as $contest_info)
+                                        @foreach ($classes as $class)
                                             <tr>
                                                 <td class="px-0">
                                                     <div class="ms-3">
-                                                        <h6 class="mb-0 fw-bold">{{ $contest_info->year }}</h6>
+                                                        <h6 class="mb-0 fw-bold">{{ $class->class_year }}</h6>
                                                     </div>
                                                 </td>
                                                 <td class="px-0">
                                                     <div class="ms-3">
-                                                        <h6 class="mb-0 fw-bold">{{ $contest_info->contest_name }}</h6>
+                                                        <h6 class="mb-0 fw-bold">{{ $class->class }}</h6>
                                                     </div>
                                                 </td>
                                                 <td class="px-0">
-                                                    <div class="ms-3">
-                                                        <h6 class="mb-0 fw-bold">{{ $contest_info->phase_name }}</h6>
-                                                    </div>
-                                                </td>
-                                                <td class="px-0">
-                                                    <div class="ms-3">
-                                                        <h6 class="mb-0 fw-bold">
-                                                            {{ $contest_info->team_name }}
-                                                        </h6>
-                                                    </div>
-                                                </td>
-                                                <td class="px-0">
-                                                    <div class="ms-3">
-                                                        <h6 class="mb-0 fw-bold">
-                                                            {{ $contest_info->place }}
-                                                        </h6>
-                                                    </div>
-                                                </td>
-                                                <td class="px-0">
-                                                    <form id="deleteContest{{ $contest_info->id }}"
-                                                        action="{{ route('palmares.destroy', $contest_info->id) }}"
+                                                    <form id="deleteClass{{ $class->id }}"
+                                                        action="{{ route('classes.destroy', $class->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -94,7 +72,7 @@
             <button
                 class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center position-fixed bottom-0 end-0 m-3"
                 type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-                aria-controls="offcanvasExample" onclick="window.location.href='{{ route('palmares.create') }}'">
+                aria-controls="offcanvasExample" onclick="window.location.href='{{ route('classes.create') }}'">
                 <i class="bi bi-database-add fs-7"></i>
             </button>
         </div>

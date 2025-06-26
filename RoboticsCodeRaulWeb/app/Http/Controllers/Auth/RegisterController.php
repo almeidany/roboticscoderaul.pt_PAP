@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
+use App\Models\Classes;
 
 class RegisterController extends Controller
 {
@@ -76,6 +77,13 @@ class RegisterController extends Controller
         //order by alphabetical order
 
         $tshirt_sizes = Tshirts::all();
-        return view('auth.register', compact('tshirt_sizes'));
+        $classes = Classes::orderBy('class_year', 'asc')
+            ->orderBy('class', 'asc')
+            ->get()
+            ->map(function ($item) {
+                $item->full_class = $item->class_year . $item->class;
+                return $item;
+            });
+        return view('auth.register', compact('tshirt_sizes', 'classes'));
     }
 }

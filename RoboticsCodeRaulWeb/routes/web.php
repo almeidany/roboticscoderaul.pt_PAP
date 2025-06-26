@@ -18,7 +18,6 @@ Route::get('/noticias/front/{news}', [App\Http\Controllers\NewsFrontController::
 Route::get('/patrocinadores/front', [App\Http\Controllers\SponserFrontController::class, 'index'])->name('sponsers.front');
 Route::get('/patrocinadores/front/{sponsers}', [App\Http\Controllers\SponserFrontController::class, 'show'])->name('sponsers.front.show');
 
-
 //Index Back
 Route::get('/dashboard', [App\Http\Controllers\BackController::class, 'index'])->name('dashboard')->middleware('auth');
 
@@ -85,6 +84,11 @@ Route::get('/palmares/adicionar', [App\Http\Controllers\PalmaresController::clas
 Route::post('/palmares', [App\Http\Controllers\PalmaresController::class, 'store'])->name('palmares.store')->middleware('auth');
 Route::delete('/palmares/{palmares}', [App\Http\Controllers\PalmaresController::class, 'destroy'])->name('palmares.destroy')->middleware('auth');
 
+Route::get('/turmas', [App\Http\Controllers\ClassesController::class, 'index'])->name('classes')->middleware('auth');
+Route::get('/turmas/adicionar-turma', [App\Http\Controllers\ClassesController::class, 'create'])->name('classes.create')->middleware('auth');
+Route::post('/turmas', [App\Http\Controllers\ClassesController::class, 'store'])->name('classes.store')->middleware('auth');
+Route::delete('/turmas/{classes}', [App\Http\Controllers\ClassesController::class, 'destroy'])->name('classes.destroy')->middleware('auth');
+
 //contests
 Route::get('/concursos', [App\Http\Controllers\ContestController::class, 'index'])->name('contests')->middleware('auth');
 Route::get('/concursos/adicionar-concurso', [App\Http\Controllers\ContestController::class, 'create'])->name('contests.create')->middleware('auth');
@@ -99,7 +103,6 @@ Route::get('/patrocinadores/{sponsers}/editar', [App\Http\Controllers\SponserCon
 Route::get('/patrocinadores/{sponsers}/visualizacao', [App\Http\Controllers\SponserController::class, 'show'])->name('sponsers.show')->middleware('auth');
 Route::put('/patrocinadores/{sponsers}', [App\Http\Controllers\SponserController::class, 'update'])->name('sponsers.update')->middleware('auth');
 Route::delete('/patrocinadores/{sponsers}', [App\Http\Controllers\SponserController::class, 'destroy'])->name('sponsers.destroy')->middleware('auth');
-
 
 //attendance
 Route::get('/presencas', [App\Http\Controllers\AttendanceController::class, 'index'])->name('attendance')->middleware('auth');
