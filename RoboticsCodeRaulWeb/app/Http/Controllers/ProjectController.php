@@ -77,7 +77,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $caegories = Categories::all();
+        $category = Categories::all();
 
         $project_users = user::select('users.*')
             ->join('project_users', 'project_users.user_id', '=', 'users.id')
@@ -86,7 +86,7 @@ class ProjectController extends Controller
 
         $users = User::all();
 
-        return view('projects.show', compact('categories', 'project', 'project_users', 'users'));
+        return view('projects.show', compact('category', 'project', 'project_users', 'users'));
     }
 
     /**

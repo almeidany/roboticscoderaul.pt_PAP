@@ -31,16 +31,14 @@
                                         <div class="mb-3">
                                             <label class="form-label">Nome do Projeto <span
                                                     class="text-danger"></span></label>
-                                            <label
-                                                class="form-control-plaintext">{{ old('projectname', $project->projectname) }}</label>
+                                            <label class="form-control-plaintext">{{ $project->projectname }}</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Designação <span
                                                     class="text-danger"></span></label>
-                                            <label
-                                                class="form-control-plaintext">{{ old('designation', $project->designation) }}</label>
+                                            <label class="form-control-plaintext">{{ $project->designation }}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -48,10 +46,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Categoria <span
-                                                    class="text-danger"></span></label>
+                                            <label class="form-label">Categoria<span class="text-danger"></span></label>
                                             <label class="form-control-plaintext">
-                                                {{ old('category', $categories[$project->category] ?? '') }}
+                                                {{ $project->category }}
                                             </label>
                                         </div>
                                     </div>
@@ -59,8 +56,7 @@
                                         <div class="mb-3">
                                             <label class="form-label">Data de Início <span
                                                     class="text-danger"></span></label>
-                                            <label
-                                                class="form-control-plaintext">{{ old('start_date', $project->start_date) }}</label>
+                                            <label class="form-control-plaintext">{{ $project->start_date }}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -70,15 +66,14 @@
                                         <div class="mb-3">
                                             <label class="form-label">Data de Conclusão <span
                                                     class="text-danger"></span></label>
-                                            <label
-                                                class="form-control-plaintext">{{ old('end_date', $project->end_date) }}</label>
+                                            <label class="form-control-plaintext">{{ $project->end_date }}</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Github <span class="text-danger"></span></label>
                                             <label class="form-control-plaintext">
-                                                {{ old('github_url', $project->github_url) }}
+                                                {{ $project->github_url }}
                                             </label>
                                         </div>
                                     </div>
@@ -115,7 +110,7 @@
                                             <label class="form-label">Descrição <span
                                                     class="text-danger"></span></label>
                                             <label class="form-control-plaintext">
-                                                {{ old('description', $project->description) }}
+                                                {{ $project->description }}
                                             </label>
                                         </div>
                                     </div>

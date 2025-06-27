@@ -30,11 +30,16 @@
                                     <h4 class="card-title">Lista de Projetos</h4>
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="px-0 text-muted text-center">Nome</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Categoria</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Github</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Estado</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Ações</th>
+                                            <th data-priority="1" scope="col" class="px-0 text-muted text-center">
+                                                Nome</th>
+                                            <th data-priority="2" scope="col" class="px-0 text-muted text-center">
+                                                Categoria</th>
+                                            <th data-priority="3" scope="col" class="px-0 text-muted text-center">
+                                                Github</th>
+                                            <th data-priority="4" scope="col" class="px-0 text-muted text-center">
+                                                Estado</th>
+                                            <th data-priority="5" scope="col" class="px-0 text-muted text-center">
+                                                Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,6 +140,7 @@
     <script src="{{ asset('assets/js/dashboards/dashboard.js') }}"></script>
     <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatable-basic.init.js') }}"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
 </body>
 
 </html>

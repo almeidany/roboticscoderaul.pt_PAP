@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/create.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="{{ asset('/assets/css/datatable.css') }}">
+
     <link rel="stylesheet" href="{{ asset('/assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/assets/libs/select2/dist/css/select2.min.css') }}">

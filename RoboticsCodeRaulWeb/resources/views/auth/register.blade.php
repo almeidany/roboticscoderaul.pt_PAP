@@ -31,7 +31,7 @@
                                         <div class="input-group-desc">
                                             <input class="input--style-5 @error('first_name') is-invalid @enderror"
                                                 type="text" name="first_name" value="{{ old('first_name') }}"
-                                                placeholder="Primeiro Nome" required style="width: 100%">
+                                                placeholder="Primeiro Nome" required style="">
                                             @error('first_name')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror

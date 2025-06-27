@@ -32,6 +32,7 @@ return new class extends Migration
             $table->integer('raffles_sold')->default(0);
             $table->integer('raffles_toReturn')->default(0);
             $table->integer('total_sold_byuser')->default(0);
+            $table->string('role')->default('Default');
             $table->timestamps();
         });
 

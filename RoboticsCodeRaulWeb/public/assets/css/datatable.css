@@ -1,0 +1,18 @@
+/* impedir que o texto quebre dentro das células */
+table.dataTable td,
+table.dataTable th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* primeira coluna (icone) estreita */
+table.dataTable td.dtr-control,
+table.dataTable th.dtr-control {
+    width: 32px;
+}
+
+/* borda suave como no CoinMarketCap */
+table.dataTable tbody tr {
+    border-bottom: 1px solid #eef2f5;
+}
