@@ -15,4 +15,5 @@
 
     <link href="{{ asset('assets/img/favpng.png') }}" rel="icon">
     <link rel="stylesheet" href="{{ asset('assets/css/pfp.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/scroll.css') }}">
 </head>

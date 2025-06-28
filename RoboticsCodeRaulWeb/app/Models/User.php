@@ -30,7 +30,7 @@ class User extends Authenticatable
         'photo',
         'allergies_description',
         'email',
-        'password'
+        'password',
     ];
 
     /**

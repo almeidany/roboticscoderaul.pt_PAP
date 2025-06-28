@@ -19,4 +19,13 @@
         media="all">
     <link rel="stylesheet" href="{{ asset('/assets/libs/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/register.css') }}">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+    </style>
 </head>

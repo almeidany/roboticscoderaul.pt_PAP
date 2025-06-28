@@ -41,8 +41,7 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td class="px-0 text-center">
-                                                <strong>{{ $user->first_name }}
-                                                    {{ $user->last_name }}</strong>
+                                                <strong>{{ $user->first_name }} {{ $user->last_name }}</strong>
                                             </td>
                                             <td class="px-0 text-center">
                                                 {{ $user->class }}
@@ -53,9 +52,9 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="number" name="raffles_given"
-                                                        value="{{ $user->raffles_given }}" class="form-control"
+                                                        value="{{ max(0, $user->raffles_given) }}" class="form-control"
                                                         style="width: 80px; margin: 0 auto; text-align: center;"
-                                                        onchange="this.form.submit()">
+                                                        min="0" onchange="this.form.submit()">
                                                 </form>
                                             </td>
                                             <td class="px-0 text-center">
@@ -64,16 +63,16 @@
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="number" name="raffles_sold"
-                                                        value="{{ $user->raffles_sold }}" class="form-control"
+                                                        value="{{ max(0, $user->raffles_sold) }}" class="form-control"
                                                         style="width: 80px; margin: 0 auto; text-align: center;"
-                                                        onchange="this.form.submit()">
+                                                        min="0" onchange="this.form.submit()">
                                                 </form>
                                             </td>
                                             <td class="px-0 text-center">
                                                 {{ $user->total_sold_byuser }} €
                                             </td>
                                             <td class="px-0 text-center">
-                                                {{ $user->raffles_toReturn }}
+                                                {{ max(0, $user->raffles_toReturn) }}
                                             </td>
                                         </tr>
                                     @endforeach
