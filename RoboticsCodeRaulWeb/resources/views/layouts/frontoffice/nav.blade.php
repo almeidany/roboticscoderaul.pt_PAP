@@ -18,7 +18,7 @@
             <div class="navbar-nav">
                 <a href="{{ route('home') }}" class="nav-item nav-link">Página Inicial</a>
                 <a href="{{ route('contest') }}" class="nav-item nav-link">Concursos</a>
-                <a href="{{ route('gallery.front') }}" class="nav-item nav-link">Galeria</a>
+                {{-- <a href="{{ route('gallery.front') }}" class="nav-item nav-link">Galeria</a> --}}
                 <a href="{{ route('news.front') }}" class="nav-item nav-link">Notícias</a>
                 <a href="{{ route('sponsers.front') }}" class="nav-item nav-link">Patrocionadores</a>
                 <a href="{{ route('about_us') }}" class="nav-item nav-link">Sobre Nós</a>

@@ -30,8 +30,9 @@
                                     <div class="col-2">
                                         <div class="input-group-desc">
                                             <input class="input--style-5 @error('first_name') is-invalid @enderror"
-                                                type="text" name="first_name" value="{{ old('first_name') }}"
-                                                placeholder="Primeiro Nome" required style="">
+                                                type="text" name="first_name" id="first_name"
+                                                value="{{ old('first_name') }}" placeholder="Primeiro Nome" required
+                                                style="">
                                             @error('first_name')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -40,8 +41,9 @@
                                     <div class="col-2">
                                         <div class="input-group-desc">
                                             <input class="input--style-5 @error('last_name') is-invalid @enderror"
-                                                type="text" name="last_name" value="{{ old('last_name') }}"
-                                                placeholder="Último Nome" required style="width: 100%">
+                                                type="text" name="last_name" id="last_name"
+                                                value="{{ old('last_name') }}" placeholder="Último Nome" required
+                                                style="width: 100%">
                                             @error('last_name')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -92,7 +94,7 @@
                                     <div class="col-2">
                                         <div class="input-group-desc">
                                             <input class="input--style-5 @error('email') is-invalid @enderror"
-                                                type="email" name="email" value="{{ old('email') }}"
+                                                type="email" name="email" id="email" value="{{ old('email') }}"
                                                 placeholder="Email Institucional" required>
                                             @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -102,8 +104,9 @@
                                     <div class="col-2">
                                         <div class="input-group-desc">
                                             <input class="input--style-5 @error('phonenumber') is-invalid @enderror"
-                                                type="text" name="phonenumber" value="{{ old('phonenumber') }}"
-                                                placeholder="Número de Telefone" required>
+                                                type="text" name="phonenumber" id="phonenumber"
+                                                value="{{ old('phonenumber') }}" placeholder="Número de Telefone"
+                                                required>
                                             @error('phonenumber')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -115,7 +118,7 @@
 
                         <!-- Turma e Tamanho T-shirt -->
                         <div class="form-row">
-                            <div class="name">Escola</div>
+                            <div class="name" style="margin-top: 20px">Escola</div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
@@ -138,10 +141,11 @@
                                         </div>
                                     </div>
                                     <div class="col-2">
-                                        <div class="input-group-desc">
+                                        <div class="input-group-desc" style="margin-top: 20px;">
                                             <input class="input--style-5 @error('schoolnumber') is-invalid @enderror"
-                                                type="text" name="schoolnumber" value="{{ old('schoolnumber') }}"
-                                                placeholder="Número de Processo" required style="width: 100%;">
+                                                type="text" name="schoolnumber" id="schoolnumber"
+                                                value="{{ old('schoolnumber') }}" placeholder="Número de Processo"
+                                                required style="width: 100%;">
                                             <!-- width 100% -->
                                             @error('schoolnumber')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -196,7 +200,7 @@
                         <!-- Autorização Imagem e Foto -->
                         <div class="form-row" style="margin-bottom: 20px;">
                             <!-- Ajuste no margin-bottom -->
-                            <div class="name">Imagem</div>
+                            <div class="name">Autorização de Imagem</div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
@@ -223,7 +227,7 @@
                                         <div class="input-group-desc">
                                             <label for="formFile" class="btn btn--radius-2 btn--red"
                                                 style="cursor:pointer; display:block; width:100%; text-align:center;">
-                                                ESCOLHER FOTO
+                                                ESCOLHER FOTO DE PERFIL
                                             </label>
                                             <input class="input--style-5 @error('photo') is-invalid @enderror"
                                                 type="file" name="photo" id="formFile" style="display:none;">
@@ -271,11 +275,11 @@
         </div>
     </div>
 
-    <script src="{{ asset('/assets/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('/assets/libs/select2/dist/js/select2.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/select2_config.js') }}"></script>
-    <script src="{{ asset('/assets/js/fp_users.js') }}"></script>
-    <script src="{{ asset('/assets/js/global.js') }}"></script>
+    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/select2_config.js') }}"></script>
+    <script src="{{ asset('assets/js/fp_register.js') }}"></script>
+    <script src="{{ asset('assets/js/global.js') }}"></script>
 
 </body>
 

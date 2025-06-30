@@ -10,6 +10,6 @@ class Attendance extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class); // Correção: belongsTo em vez de hasMany
+        return $this->belongsTo(User::class);
     }
 }

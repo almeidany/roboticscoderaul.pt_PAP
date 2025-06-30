@@ -11,24 +11,6 @@ $(function () {
  *       Basic Table                   *
  ****************************************/
 $("#zero_config").DataTable({
-  responsive: {
-    details: {
-      type: 'column'   // usa a coluna 0 só para o ícone
-    }
-  },
-  columnDefs: [
-    {
-      className: 'dtr-control', // ícone verde do Responsive
-      orderable: false,         // sem ordenação
-      targets: 0,             // primeira coluna (vazia)
-      responsivePriority: 1
-    },  // mantém-se sempre visível
-
-    { responsivePriority: 1, targets: 1 } // garante que "Nome" fica sempre
-  ],
-  paging: true,
-  info: true,
-  language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/pt-PT.json' }
 });
 
 /****************************************
