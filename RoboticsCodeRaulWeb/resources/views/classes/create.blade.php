@@ -23,39 +23,41 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('classes.store') }}" enctype="multipart/form-data" method="POST">
+                            <form action="{{ route('classes.store') }}" enctype="multipart/form-data" method="POST"
+                                class="d-flex flex-column align-items-center w-100">
                                 @csrf
-                                <div class="row pt-3">
+                                <div class="row pt-3 w-100 justify-content-center">
                                     <!-- Ano (Select2) -->
-                                    <div class="col-md-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">Ano Escolar</label>
+                                    <div class="col-md-3 d-flex flex-column align-items-center">
+                                        <div class="mb-3 w-100">
+                                            <label class="form-label w-100 text-center">Ano Escolar</label>
                                             <select name="class_year"
-                                                class="form-select select2 @error('class_year') is-invalid @enderror"
+                                                class="form-select select2 @error('class_year') is-invalid @enderror text-center"
                                                 required>
                                                 <option value="">Selecione o ano</option>
-                                                @for ($i = 12; $i >= 0; $i--)
+                                                @for ($i = 12; $i >= 1; $i--)
                                                     <option value="{{ $i }}"
                                                         {{ old('class_year') == $i ? 'selected' : '' }}>
                                                         {{ $i }}</option>
                                                 @endfor
                                             </select>
                                             @error('class_year')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="invalid-feedback text-center">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
                                     <!-- Container das turmas -->
-                                    <div class="col-12">
-                                        <label class="form-label">Turmas</label>
-                                        <div id="turmas-container">
-                                            <div class="row align-items-end turma-group mb-2">
-                                                <div class="col-md-3">
-                                                    <input type="text" name="class[]" class="form-control"
-                                                        placeholder="Letra da Turma" required>
+                                    <div class="col-12 d-flex flex-column align-items-center">
+                                        <label class="form-label w-100 text-center">Turmas</label>
+                                        <div id="turmas-container" class="w-50">
+                                            <div class="row align-items-end turma-group mb-2 justify-content-center">
+                                                <div class="col-md-6">
+                                                    <input type="text" name="class[]"
+                                                        class="form-control text-center" placeholder="Letra da Turma"
+                                                        required>
                                                 </div>
-                                                <div class="col-md-1 text-end">
+                                                <div class="col-md-2 text-end">
                                                     <button type="button" class="btn btn-add btn-sm"
                                                         onclick="adicionarTurma()">＋</button>
                                                 </div>
@@ -64,13 +66,12 @@
                                     </div>
 
                                     <!-- Botões -->
-                                    <div class="form-actions text-center mt-4">
+                                    <div class="form-actions text-center mt-4 w-100">
                                         <button type="submit" class="btn btn-primary">Adicionar Turma</button>
                                         <a href="{{ route('classes.create') }}" class="btn btn-danger ms-2">Cancelar</a>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

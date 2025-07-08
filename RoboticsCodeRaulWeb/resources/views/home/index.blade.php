@@ -47,7 +47,7 @@
                         Secundária Raúl Proença. O objetivo: ensinar programação e construção de robôs. Este espaço
                         tornou-se rapidamente um local de aprendizagem e inovação, com participação em competições e
                         foco no trabalho em equipa. Veja mais em
-                        <a href="sobrenos.php">sobre nós</a>.
+                        <a href="{{ route('about_us') }}">sobre nós</a>.
                     </p>
                 </div>
             </div>

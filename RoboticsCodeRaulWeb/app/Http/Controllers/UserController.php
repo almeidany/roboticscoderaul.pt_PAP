@@ -41,12 +41,8 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Criação do usuário
-        User::create([
-            // Aqui você pode adicionar os dados do usuário ao banco de dados
-        ]);
 
-        return redirect()->route('users.index')->with('success', 'Usuário criado com sucesso!');
+        User::create([]);
     }
     public function show($id)
     {

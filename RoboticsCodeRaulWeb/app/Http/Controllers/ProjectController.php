@@ -44,6 +44,7 @@ class ProjectController extends Controller
             'description' => 'required|string|max:2000',
 
         ]);
+
         $project = new Project();
         $project->projectname = $request->input('projectname');
         $project->designation = $request->input('designation');
@@ -51,6 +52,7 @@ class ProjectController extends Controller
         $project->start_date = $request->input('start_date');
         $project->end_date = $request->input('end_date');
         $project->github_url = $request->input('github_url');
+
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension();
@@ -59,6 +61,7 @@ class ProjectController extends Controller
             $path = $file->storeAs('images/projects', $name);
             $project->photo = $name;
         };
+
         $project->description = $request->input('description');
 
         $project->save();

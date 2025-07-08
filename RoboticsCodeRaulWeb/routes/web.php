@@ -23,11 +23,11 @@ Route::get('/dashboard', [App\Http\Controllers\BackController::class, 'index'])-
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
-    Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+    Route::get('/registo', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/registo', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
-    Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+    Route::get('/aceder', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/aceder', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -109,10 +109,5 @@ Route::get('/presencas', [App\Http\Controllers\AttendanceController::class, 'ind
 Route::get('/presencas/marcar', [App\Http\Controllers\AttendanceController::class, 'create'])->name('attendance.create')->middleware('auth');
 Route::post('/presencas', [App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store')->middleware('auth');
 Route::delete('/presencas/{attendance}', [App\Http\Controllers\AttendanceController::class, 'destroy'])->name('attendance.destroy')->middleware('auth');
-
-/* //schedules
-Route::get('/horario/editar', [App\Http\Controllers\ScheduleController::class, 'edit'])->name('schedule.edit')->middleware('auth');
-Route::put('/horario/editar', [App\Http\Controllers\ScheduleController::class, 'update'])->name('schedule.update')->middleware('auth');
-Route::delete('/horario/editar', [App\Http\Controllers\ScheduleController::class, 'destroy'])->name('schedule.destroy')->middleware('auth'); */
 
 Auth::routes();
