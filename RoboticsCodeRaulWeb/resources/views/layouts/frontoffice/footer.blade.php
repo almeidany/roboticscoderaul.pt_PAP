@@ -4,7 +4,7 @@
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
                 <a href="{{ route('home') }}" class="d-inline-block mb-3" style="display: flex; justify-content: center;">
                     <h1 style="margin-bottom: 10px;">
-                        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" class="img-fluid"
+                        <img src="{{ asset('assets/img/logo_white.png') }}" alt="Logo" class="img-fluid"
                             style="max-height: 100px;">
                     </h1>
                 </a>

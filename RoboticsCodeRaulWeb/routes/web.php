@@ -4,7 +4,6 @@ use App\Http\Controllers\BackController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-// Redireciona a raiz para /home
 Route::redirect('/', '/home');
 
 //Frontoffice
@@ -12,6 +11,7 @@ Route::get('/home', [App\Http\Controllers\FrontController::class, 'index'])->nam
 Route::get('/sobre-nos', [App\Http\Controllers\FrontController::class, 'about_us'])->name('about_us');
 Route::get('/galeria/front', [App\Http\Controllers\GalleryFrontController::class, 'index'])->name('gallery.front');
 Route::get('/concursos/front', [App\Http\Controllers\FrontController::class, 'contest'])->name('contest');
+
 // Listar notícias frontoffice
 Route::get('/noticias/front', [App\Http\Controllers\NewsFrontController::class, 'index'])->name('news.front');
 Route::get('/noticias/front/{news}', [App\Http\Controllers\NewsFrontController::class, 'show'])->name('news.front.show');

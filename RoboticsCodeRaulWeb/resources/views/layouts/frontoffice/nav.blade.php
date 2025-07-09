@@ -10,7 +10,7 @@
 
         <!-- Logo centrado -->
         <a class="navbar-brand mx-auto fw-bold text-white" href="{{ route('home') }}">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" style="height: 75px; margin-top: -14px;">
+            <img src="{{ asset('assets/img/logo_white.png') }}" alt="Logo" style="height: 75px; margin-top: -14px;">
         </a>
 
         <!-- Menu para desktop e mobile -->
