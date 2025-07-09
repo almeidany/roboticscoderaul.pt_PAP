@@ -35,7 +35,9 @@
                                             <th scope="col" class="px-0 text-muted text-center">Nome da fase</th>
                                             <th scope="col" class="px-0 text-muted text-center">Nome da equipa</th>
                                             <th scope="col" class="px-0 text-muted text-center">Posição</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Ações</th>
+                                            <th scope="col"
+                                                class="px-0 text-muted text-center {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
+                                                Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,7 +72,7 @@
                                                         </h6>
                                                     </div>
                                                 </td>
-                                                <td class="px-0">
+                                                <td class="px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                                     <form id="deleteContest{{ $contest_info->id }}"
                                                         action="{{ route('palmares.destroy', $contest_info->id) }}"
                                                         method="POST">

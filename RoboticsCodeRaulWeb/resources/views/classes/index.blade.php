@@ -32,7 +32,9 @@
                                         <tr>
                                             <th scope="col" class="px-0 text-muted text-center">Turma</th>
                                             <th scope="col" class="px-0 text-muted text-center">Ano</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Ações</th>
+                                            <th scope="col"
+                                                class="px-0 text-muted text-center {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
+                                                Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,7 +50,7 @@
                                                         <h6 class="mb-0 fw-bold">{{ $class->class }}</h6>
                                                     </div>
                                                 </td>
-                                                <td class="px-0">
+                                                <td class="px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                                     <form id="deleteClass{{ $class->id }}"
                                                         action="{{ route('classes.destroy', $class->id) }}"
                                                         method="POST">
@@ -70,7 +72,7 @@
                 </div>
             </div>
             <button
-                class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center position-fixed bottom-0 end-0 m-3"
+                class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center position-fixed bottom-0 end-0 m-3 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}"
                 type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
                 aria-controls="offcanvasExample" onclick="window.location.href='{{ route('classes.create') }}'">
                 <i class="bi bi-database-add fs-7"></i>

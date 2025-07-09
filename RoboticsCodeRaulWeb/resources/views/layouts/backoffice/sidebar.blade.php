@@ -6,9 +6,7 @@
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="{{ route('dashboard') }}" class="text-nowrap logo-img">
                 <img src="{{ asset('assets/img/logo.png') }}" class="dark-logo d-block" alt="Logo-Dark"
-                    style="max-width: 150px;">
-                <img src="{{ asset('assets/img/logo-light.png') }}" class="light-logo d-none" alt="Logo-light"
-                    style="max-width: 150px;">
+                    style="max-width: 150px; margin auto;">
             </a>
             <a href="javascript:void(0)" class="sidebartoggler ms-auto text-decoration-none fs-5 d-block d-xl-none">
                 <i class="bi bi-x"></i>

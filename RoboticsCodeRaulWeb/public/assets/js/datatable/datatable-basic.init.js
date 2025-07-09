@@ -11,6 +11,20 @@ $(function () {
  *       Basic Table                   *
  ****************************************/
 $("#zero_config").DataTable({
+  language: {
+    lengthMenu: "Mostrar _MENU_ registos por página",
+    zeroRecords: "Nada encontrado",
+    info: "A mostrar página _PAGE_ de _PAGES_",
+    infoEmpty: "Sem registos disponíveis",
+    infoFiltered: "(filtrado de _MAX_ registos no total)",
+    search: "Pesquisar:",
+    paginate: {
+      first: "Primeiro",
+      last: "Último",
+      next: "Seguinte",
+      previous: "Anterior"
+    }
+  }
 });
 
 /****************************************

@@ -31,7 +31,9 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" class="px-0 text-muted text-center">Nome</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Ações</th>
+                                            <th scope="col"
+                                                class="px-0 text-muted text-center {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
+                                                Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,7 +44,7 @@
                                                         <h6 class="mb-0 fw-bold">{{ $contests->name }}</h6>
                                                     </div>
                                                 </td>
-                                                <td class="px-0">
+                                                <td class="px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                                     <form id="deleteContest{{ $contests->id }}"
                                                         action="{{ route('projects.destroy', $contests->id) }}"
                                                         method="POST">

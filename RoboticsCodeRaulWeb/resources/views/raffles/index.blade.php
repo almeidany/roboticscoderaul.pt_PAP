@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
-@include('layouts.backoffice.projects.head')
+@include('layouts.backoffice.raffles.head')
 
 <body>
     <div id="main-wrapper">
@@ -25,6 +25,7 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+
                             <div class="table-responsive">
                                 <table id="zero_config" class="table table-striped table-bordered text-center">
                                     <h4 class="card-title">Rifas | Consulta</h4>
@@ -38,51 +39,80 @@
                                             <th class="px-0 text-muted text-center">Rifas Por Devolver</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td class="px-0 text-center">
-                                                <strong>{{ $user->first_name }} {{ $user->last_name }}</strong>
-                                            </td>
-                                            <td class="px-0 text-center">
-                                                {{ $user->class }}
-                                            </td>
-                                            <td class="px-0 text-center">
-                                                <form method="POST"
-                                                    action="{{ route('users.updateRaffles', $user->id) }}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="number" name="raffles_given"
-                                                        value="{{ max(0, $user->raffles_given) }}" class="form-control"
-                                                        style="width: 80px; margin: 0 auto; text-align: center;"
-                                                        min="0" onchange="this.form.submit()">
-                                                </form>
-                                            </td>
-                                            <td class="px-0 text-center">
-                                                <form method="POST"
-                                                    action="{{ route('users.updateRaffles', $user->id) }}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="number" name="raffles_sold"
-                                                        value="{{ max(0, $user->raffles_sold) }}" class="form-control"
-                                                        style="width: 80px; margin: 0 auto; text-align: center;"
-                                                        min="0" onchange="this.form.submit()">
-                                                </form>
-                                            </td>
-                                            <td class="px-0 text-center">
-                                                {{ $user->total_sold_byuser }} €
-                                            </td>
-                                            <td class="px-0 text-center">
-                                                {{ max(0, $user->raffles_toReturn) }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    <tbody>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <td class="px-0 text-center">
+                                                    <strong>{{ $user->first_name }} {{ $user->last_name }}</strong>
+                                                </td>
+                                                <td class="px-0 text-center">
+                                                    {{ $user->class }}
+                                                </td>
+
+                                                {{-- Rifas Atribuídas --}}
+                                                <td class="px-0 text-center">
+                                                    @if (auth()->user()->hasRole('professor') || auth()->id() === $user->id)
+                                                        <form method="POST"
+                                                            action="{{ route('users.updateRaffles', $user->id) }}">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="number" name="raffles_given"
+                                                                value="{{ max(0, $user->raffles_given) }}"
+                                                                class="form-control"
+                                                                style="width: 80px; margin: 0 auto; text-align: center;"
+                                                                min="0" onchange="this.form.submit()">
+                                                        </form>
+                                                    @else
+                                                        <span class="text-muted">?</span>
+                                                    @endif
+                                                </td>
+
+                                                {{-- Rifas Vendidas --}}
+                                                <td class="px-0 text-center">
+                                                    @if (auth()->user()->hasRole('professor') || auth()->id() === $user->id)
+                                                        <form method="POST"
+                                                            action="{{ route('users.updateRaffles', $user->id) }}">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="number" name="raffles_sold"
+                                                                value="{{ max(0, $user->raffles_sold) }}"
+                                                                class="form-control"
+                                                                style="width: 80px; margin: 0 auto; text-align: center;"
+                                                                min="0" onchange="this.form.submit()">
+                                                        </form>
+                                                    @else
+                                                        <span class="text-muted">?</span>
+                                                    @endif
+                                                </td>
+
+                                                {{-- Angariado --}}
+                                                <td class="px-0 text-center">
+                                                    @if (auth()->user()->hasRole('professor') || auth()->id() === $user->id)
+                                                        {{ $user->total_sold_byuser }} €
+                                                    @else
+                                                        <span class="text-muted">?</span>
+                                                    @endif
+                                                </td>
+
+                                                {{-- Rifas Por Devolver --}}
+                                                <td class="px-0 text-center">
+                                                    @if (auth()->user()->hasRole('professor') || auth()->id() === $user->id)
+                                                        {{ max(0, $user->raffles_toReturn) }}
+                                                    @else
+                                                        <span class="text-muted">?</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <div class="dark-transparent sidebartoggler"></div>

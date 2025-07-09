@@ -37,7 +37,8 @@
                                 </div>
                             </div>
                             <div class="news-card-footer" style="justify-content: center; ">
-                                <a href="{{ route('sponsers.edit', $item->id) }}" class="btn btn-sm btn-outline-primary"
+                                <a href="{{ route('sponsers.edit', $item->id) }}"
+                                    class="btn btn-sm btn-outline-primary {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}"
                                     title="Editar">
                                     <i class="bi bi-pencil"></i>
                                 </a>
@@ -46,7 +47,7 @@
                                     <i class="bi bi-eye"></i>
                                 </a>
                                 <form action="{{ route('sponsers.destroy', $item->id) }}" method="POST"
-                                    class="d-inline">
+                                    class="d-inline {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="Apagar"
@@ -77,7 +78,7 @@
                 </div>
             </div>
             <button
-                class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center position-fixed bottom-0 end-0 m-3"
+                class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center position-fixed bottom-0 end-0 m-3 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}"
                 type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
                 aria-controls="offcanvasExample" onclick="window.location.href='{{ route('sponsers.create') }}'">
                 <i class="bi bi-file-earmark-arrow-up fs-7"></i>

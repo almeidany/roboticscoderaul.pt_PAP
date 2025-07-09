@@ -10,8 +10,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use App\Models\tshirts;
 use App\Models\Classes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class UserController extends Controller
 {
@@ -91,35 +89,39 @@ class UserController extends Controller
         return redirect()->route('users')->with('Successo', 'Utilizador atualizado com sucesso!');
     }
 
-    public function updateRaffles(Request $request, $id)
+    public function updateRaffles(Request $request, $id, User $user)
     {
-        $request->validate([
-            'raffles_given' => 'nullable|integer',
-            'raffles_sold' => 'nullable|integer',
-        ]);
-
         $user = User::findOrFail($id);
 
+        $authUser = Auth::user();
+
+        if ($authUser && $authUser->hasRole('aluno') && $authUser->id !== $user->id) {
+            abort(403, 'Não tem permissão para alterar rifas de outro utilizador.');
+        }
+
+
+        // Validação dos inputs
+        $validated = $request->validate([
+            'raffles_given' => 'nullable|integer|min:0',
+            'raffles_sold'  => 'nullable|integer|min:0',
+        ]);
+
+        // Aplica valores apenas se existirem no request
         if ($request->has('raffles_given')) {
-            $user->raffles_given = $request->raffles_given;
+            $user->raffles_given = $request->input('raffles_given');
         }
 
         if ($request->has('raffles_sold')) {
-            $user->raffles_sold = $request->raffles_sold;
+            $user->raffles_sold = $request->input('raffles_sold');
         }
-
-        // Calcula automaticamente os campos derivados
-        $user->raffles_toReturn = ($user->raffles_given ?? 0) - ($user->raffles_sold ?? 0);
-        $user->total_sold_byuser = ($user->raffles_sold ?? 0) * 1;
 
         $user->save();
 
-        return back()->with('success', 'Dados de rifas atualizados com sucesso!');
+        return back()->with('success', 'Dados atualizados com sucesso.');
     }
 
     public function destroy($id)
     {
-
         $user = User::findOrFail($id);
         $user->delete();
 

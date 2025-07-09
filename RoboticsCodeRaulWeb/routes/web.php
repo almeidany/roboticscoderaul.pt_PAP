@@ -104,9 +104,11 @@ Route::middleware(['auth', 'can:update,project'])->group(function () {
 
 //raffles
 Route::get('/rifas/consulta', [App\Http\Controllers\RafflesController::class, 'index'])->name('raffles')->middleware('auth');
-Route::post('/rifas', [App\Http\Controllers\RafflesController::class, 'store'])->name('raffles.store')->middleware('auth');
-Route::put('/rifas/{raffles}', [App\Http\Controllers\RafflesController::class, 'update'])->name('raffles.update')->middleware('auth');
-Route::put('/users/{id}/raffles', [App\Http\Controllers\UserController::class, 'updateRaffles'])->name('users.updateRaffles')->middleware('auth');
+
+
+Route::put('/users/{id}/raffles', [App\Http\Controllers\UserController::class, 'updateRaffles'])
+    ->name('users.updateRaffles')
+    ->middleware(['auth', 'can:updateRaffles,id']);
 
 //palmares
 Route::get('/palmares', [App\Http\Controllers\PalmaresController::class, 'index'])->name('palmares')->middleware('auth');
@@ -119,7 +121,6 @@ Route::get('/concursos', [App\Http\Controllers\ContestController::class, 'index'
 //sponser
 Route::get('/patrocinadores', [App\Http\Controllers\SponserController::class, 'index'])->name('sponsers')->middleware('auth');
 Route::get('/patrocinadores/{sponsers}/visualizacao', [App\Http\Controllers\SponserController::class, 'show'])->name('sponsers.show')->middleware('auth');
-
 
 //attendance
 Route::get('/presencas', [App\Http\Controllers\AttendanceController::class, 'index'])->name('attendance')->middleware('auth');
