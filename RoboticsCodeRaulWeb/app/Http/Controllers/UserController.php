@@ -21,29 +21,7 @@ class UserController extends Controller
         $users = User::all();
         return view('users.index', compact('users'));
     }
-    public function create() {}
-    public function store(Request $request)
-    {
-        // Validação dos dados
-        $request->validate([
-            'first_name' => 'required|string|max:35',
-            'last_name' => 'required|string|max:35',
-            'schoolnumber' => 'required|integer|unique:users,schoolnumber',
-            'birth_date' => 'required|date',
-            'phonenumber' => 'required|integer|unique:users,phonenumber',
-            'class' => 'required|string|max:25',
-            'tshirt_size' => 'required|string|max:3',
-            'food_allergies' => 'required|in:sim,nao',
-            'image_authorization' => 'required|in:sim,nao',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:10920',
-            'allergies_description' => 'nullable|string|max:400',
-            'email' => 'required|string|email|max:75|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
 
-
-        User::create([]);
-    }
     public function show($id)
     {
         // Aqui você pode buscar o usuário pelo ID e passá-lo para a view

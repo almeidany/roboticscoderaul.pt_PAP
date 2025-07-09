@@ -33,7 +33,9 @@
                                             <th scope="col" class="px-0 text-muted text-center">Nome</th>
                                             <th scope="col" class="px-0 text-muted text-center">Email</th>
                                             <th scope="col" class="px-0 text-muted text-center">Nº de Processo</th>
-                                            <th scope="col" class="px-0 text-muted text-center">Ações</th>
+                                            <th scope="col"
+                                                class="px-0 text-muted text-center px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
+                                                Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,7 +63,8 @@
                                                 <td class="px-0">
                                                     <small class="text-muted">{{ $user->schoolnumber }}</small>
                                                 </td>
-                                                <td class="px-0">
+                                                <td
+                                                    class="px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                                     <form id="deleteUser{{ $user->id }}"
                                                         action="{{ route('users.destroy', $user->id) }}"
                                                         method="POST">

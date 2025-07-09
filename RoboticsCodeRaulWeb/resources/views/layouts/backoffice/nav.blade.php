@@ -5,6 +5,18 @@
                 <i class="bi bi-list"></i>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="sidebar-link nav-link align-items-center d-flex" href="{{ route('home') }}" aria-expanded="false"
+                target="_blank" style="margin-top: 10px; margin-left: 1rem;">
+                <span class="hide-menu">Homepage</span>
+            </a>
+        <li class="nav-item">
+            <a class="sidebar-link nav-link align-items-center d-flex" href="https://tr.ee/P7H9oI" aria-expanded="false"
+                target="_blank" style="margin-top: 10px; margin-left: 1rem;">
+                <span class="hide-menu">Acessos</span>
+            </a>
+        </li>
+        </li>
     </ul>
     <a class="navbar-toggler nav-icon-hover-bg rounded-circle p-0 mx-0 border-0" href="javascript:void(0)"
         data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"

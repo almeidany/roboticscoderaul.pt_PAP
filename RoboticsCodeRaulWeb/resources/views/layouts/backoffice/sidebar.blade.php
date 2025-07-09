@@ -19,55 +19,35 @@
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
             <ul id="sidebarnav">
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="https://tr.ee/P7H9oI" aria-expanded="false" target="_blank">
+                    <a class="sidebar-link" href="{{ route('dashboard') }}" aria-expanded="false">
                         <span class="d-flex">
-                            <i class="bi bi-info"></i>
+                            <i class="bi bi-pin-angle"></i>
                         </span>
-                        <span class="hide-menu">Acessos</span>
+                        <span class="hide-menu">Página Inicial</span>
                     </a>
-                    <a class="sidebar-link" href="{{ route('contests') }}" aria-expanded="false">
-                        <span class="d-flex">
-                            <i class="bi bi-book"></i>
-                        </span>
-                        <span class="hide-menu">Concursos</span>
-                    </a>
-                    {{-- <a class="sidebar-link" href="{{ route('gallery') }}" aria-expanded="false">
-                        <span class="d-flex">
-                            <i class="bi bi-archive"></i>
-                        </span>
-                        <span class="hide-menu">Galeria</span>
-                    </a> --}}
-                    <a class="sidebar-link" href="{{ route('home') }}" aria-expanded="false" target="_blank">
-                        <span class="d-flex">
-                            <i class="bi bi-house-door"></i>
-                        </span>
-                        <span class="hide-menu">Homepage</span>
-                    </a>
-
                     <a class="sidebar-link" href="{{ route('attendance') }}" aria-expanded="false">
                         <span class="d-flex">
                             <i class="bi bi-clock"></i>
                         </span>
                         <span class="hide-menu">Marcar Presença</span>
                     </a>
-
                     <a class="sidebar-link" href="{{ route('users') }}" aria-expanded="false">
                         <span class="d-flex">
                             <i class="bi bi-people"></i>
                         </span>
                         <span class="hide-menu">Membros</span>
                     </a>
+                    <a class="sidebar-link" href="{{ route('projects') }}" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="bi bi-box-seam"></i>
+                        </span>
+                        <span class="hide-menu">Projetos</span>
+                    </a>
                     <a class="sidebar-link" href="{{ route('news') }}" aria-expanded="false">
                         <span class="d-flex">
                             <i class="bi bi-newspaper"></i>
                         </span>
                         <span class="hide-menu">Noticias</span>
-                    </a>
-                    <a class="sidebar-link" href="{{ route('dashboard') }}" aria-expanded="false">
-                        <span class="d-flex">
-                            <i class="bi bi-pin-angle"></i>
-                        </span>
-                        <span class="hide-menu">Página Inicial</span>
                     </a>
                     <a class="sidebar-link" href="{{ route('palmares') }}" aria-expanded="false">
                         <span class="d-flex">
@@ -81,12 +61,19 @@
                         </span>
                         <span class="hide-menu">Patrocinadores</span>
                     </a>
-                    <a class="sidebar-link" href="{{ route('projects') }}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('contests') }}" aria-expanded="false">
                         <span class="d-flex">
-                            <i class="bi bi-box-seam"></i>
+                            <i class="bi bi-book"></i>
                         </span>
-                        <span class="hide-menu">Projetos</span>
+                        <span class="hide-menu">Concursos</span>
                     </a>
+                    {{-- <a class="sidebar-link" href="{{ route('gallery') }}" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="bi bi-archive"></i>
+                        </span>
+                        <span class="hide-menu">Galeria</span>
+                    </a> --}}
+
                     <a class="sidebar-link" href="{{ route('raffles') }}" aria-expanded="false">
                         <span class="d-flex">
                             <i class="bi bi-card-text"></i>

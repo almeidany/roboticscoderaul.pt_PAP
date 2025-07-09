@@ -117,11 +117,6 @@ return [
         'role' => \App\Models\Role::class,
 
         'permission' => \App\Models\Permission::class,
-
-        /**
-         * Will be used only if the teams functionality is enabled.
-         */
-        'team' => \App\Models\Team::class,
     ],
 
     /*
@@ -137,11 +132,6 @@ return [
         'roles' => 'roles',
 
         'permissions' => 'permissions',
-
-        /**
-         * Will be used only if the teams functionality is enabled.
-         */
-        'teams' => 'teams',
 
         'role_user' => 'role_user',
 
@@ -229,31 +219,6 @@ return [
         ],
     ],
 
-    'teams' => [
-        /*
-        |--------------------------------------------------------------------------
-        | Use teams feature in the package
-        |--------------------------------------------------------------------------
-        |
-        | Defines if Laratrust will use the teams feature.
-        | Please check the docs to see what you need to do in case you have the package already configured.
-        |
-        */
-        'enabled' => false,
-
-        /*
-        |--------------------------------------------------------------------------
-        | Strict check for roles/permissions inside teams
-        |--------------------------------------------------------------------------
-        |
-        | Determines if a strict check should be done when checking if a role or permission is added inside a team.
-        | If it's false, when checking a role/permission without specifying the team,
-        | it will check only if the user has added that role/permission ignoring the team.
-        |
-        */
-        'strict_check' => false,
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Laratrust Permissions as Gates
@@ -282,7 +247,7 @@ return [
         | Turn this value to false if you don't want to use Laratrust admin panel
         |
         */
-        'register' => false,
+        'register' => true,
 
         /*
         |--------------------------------------------------------------------------
