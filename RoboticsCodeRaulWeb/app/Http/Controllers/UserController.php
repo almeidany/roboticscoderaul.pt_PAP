@@ -86,7 +86,7 @@ class UserController extends Controller
         // Atualiza tudo de uma vez
         $user->update($data);
 
-        return redirect()->route('users')->with('Successo', 'Utilizador atualizado com sucesso!');
+        return redirect()->route('users')->with('message', 'Utilizador atualizado com sucesso!');
     }
 
     public function updateRaffles(Request $request, $id, User $user)
@@ -96,7 +96,7 @@ class UserController extends Controller
         $authUser = Auth::user();
 
         if ($authUser && $authUser->hasRole('aluno') && $authUser->id !== $user->id) {
-            abort(403, 'Não tem permissão para alterar rifas de outro utilizador.');
+            abort(403);
         }
 
 
@@ -117,7 +117,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back()->with('success', 'Dados atualizados com sucesso.');
+        return back()->with('message', 'Dados atualizados com sucesso.');
     }
 
     public function destroy($id)
@@ -125,6 +125,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users')->with('Successo', 'Utilizador excluído com sucesso!');
+        return redirect()->route('users')->with('message', 'Utilizador excluído com sucesso!');
     }
 }

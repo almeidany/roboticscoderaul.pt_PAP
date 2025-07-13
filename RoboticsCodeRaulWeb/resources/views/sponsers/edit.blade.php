@@ -16,123 +16,132 @@
             <!--  Header End -->
             <div class="body-wrapper">
                 <div class="container-fluid">
-
-                    <form action="{{ route('news.update', $news->id) }}" enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('sponsers.update', $sponsers->id) }}" enctype="multipart/form-data"
+                        method="POST">
                         @csrf
                         @method('PUT')
                         <div class="card">
                             <div class="card-header text-bg-primary">
-                                <h4 class="mb-0 text-white text-center">Publicar Noticia</h4>
+                                <h4 class="mb-0 text-white text-center">Editar Patrocinador</h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="row mb-3">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Carregar Fotografia</label>
-                                            <input class="form-control" type="file" id="formFile" name="photo">
-                                            @if (old('photo'))
-                                                <img src="{{ asset('storage/images/news/' . old('photo')) }}"
-                                                    width="100" class="mt-2">
-                                            @elseif (isset($news) && $news->photo)
-                                                <img src="{{ asset('storage/images/news/' . $news->photo) }}"
+                                            <input class="form-control @error('photo') is-invalid @enderror"
+                                                type="file" id="formFile" name="photo">
+                                            @if ($sponsers->photo)
+                                                <img src="{{ asset('storage/images/sponsers/' . $sponsers->photo) }}"
                                                     width="100" class="mt-2">
                                             @endif
+                                            @error('photo')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Título</label>
-                                            <input type="text" name="title" class="form-control"
-                                                value="{{ old('title', $news->title) }}">
+                                            <label class="form-label">Entidade</label>
+                                            <input type="text" name="enterprise_name"
+                                                class="form-control @error('enterprise_name') is-invalid @enderror"
+                                                value="{{ old('enterprise_name', $sponsers->enterprise_name) }}">
+                                            @error('enterprise_name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
 
-                                    <label class="form-label">Notícia</label>
-                                    <textarea id="summernote" name="news">{{ old('news', $news->news) }}</textarea>
+                                    <label class="form-label">Descrição</label>
+                                    <textarea id="summernote" name="designation" class="form-control @error('designation') is-invalid @enderror">{{ old('designation', $sponsers->designation) }}</textarea>
+                                    @error('designation')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
 
                                     <div class="row pt-3 justify-content-center" style="text-align: center;">
                                         <div class="col-md-4 d-flex flex-column align-items-center">
                                             <div class="mb-3 w-100">
-                                                <label class="form-label">Data da Publicação</label>
+                                                <label class="form-label">Link</label>
                                                 <div class="form-group w-100">
-                                                    <input type="date" name="news_date" class="form-control"
+                                                    <input type="text" name="link"
+                                                        class="form-control @error('link') is-invalid @enderror"
                                                         style="width: 100%; text-align: center;"
-                                                        value="{{ old('news_date', $news->news_date ?? \Carbon\Carbon::now()->format('Y-m-d')) }}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 d-flex flex-column align-items-center">
-                                            <div class="mb-3 w-100">
-                                                <label class="form-label">Publicado Por</label>
-                                                <div class="form-group w-100">
-                                                    <input type="text" name="author_user" class="form-control"
-                                                        style="width: 100%; text-align: center;"
-                                                        value="{{ old('author_user', Auth::user()->first_name . ' ' . Auth::user()->last_name) }}"
-                                                        readonly>
+                                                        value="{{ old('link', $sponsers->link) }}">
+                                                    @error('link')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-actions text-center mt-2" style="margin-bottom: 50px;">
+                                        <button type="submit" class="btn btn-primary">Guardar Alterações</button>
+                                        <a href="{{ route('sponsers') }}" class="btn btn-danger ms-2">Cancelar</a>
+                                    </div>
                                 </div>
-                                <div class="form-actions text-center mt-2" style="margin-bottom: 50px;">
-                                    <button type="submit" class="btn btn-primary">Publicar Noticia</button>
-                                    <a href="{{ route('news') }}" class="btn btn-danger ms-2">Cancelar</a>
-                                </div>
+                            </div>
+                        </div>
                     </form>
+                    @include('layouts.backoffice.Settings_Script')
                 </div>
             </div>
-            @include('layouts.backoffice.Settings_Script')
-        </div>
-    </div>
-    <div class="dark-transparent sidebartoggler"></div>
-    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-    <!-- Import Js Files -->
-    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/theme/app.init.js') }}"></script>
-    <script src="{{ asset('assets/js/theme/theme.js') }}"></script>
-    <script src="{{ asset('assets/js/theme/app.min.js') }}"></script>
-    <script src="{{ asset('assets/js/theme/sidebarmenu.js') }}"></script>
+            <div class="dark-transparent sidebartoggler"></div>
+            <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+            <!-- Import Js Files -->
+            <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('assets/libs/simplebar/dist/simplebar.min.js') }}"></script>
+            <script src="{{ asset('assets/js/theme/app.init.js') }}"></script>
+            <script src="{{ asset('assets/js/theme/theme.js') }}"></script>
+            <script src="{{ asset('assets/js/theme/app.min.js') }}"></script>
+            <script src="{{ asset('assets/js/theme/sidebarmenu.js') }}"></script>
 
-    <!-- highlight.js (code view) -->
-    <script src="{{ asset('assets/js/highlights/highlight.min.js') }}"></script>
-    <script>
-        hljs.initHighlightingOnLoad();
+            <!-- highlight.js (code view) -->
+            <script src="{{ asset('assets/js/highlights/highlight.min.js') }}"></script>
+            <script>
+                hljs.initHighlightingOnLoad();
 
-        document.querySelectorAll("pre.code-view > code").forEach((codeBlock) => {
-            codeBlock.textContent = codeBlock.innerHTML;
-        });
-    </script>
-    <script src="{{ asset('assets/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dashboards/dashboard.js') }}"></script>
-    <!-- jQuery primeiro -->
-    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+                document.querySelectorAll("pre.code-view > code").forEach((codeBlock) => {
+                    codeBlock.textContent = codeBlock.innerHTML;
+                });
+            </script>
+            <script src="{{ asset('assets/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
+            <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+            <script src="{{ asset('assets/js/dashboards/dashboard.js') }}"></script>
+            <!-- jQuery primeiro -->
+            <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
 
-    <!-- Depois Summernote -->
-    <script src="{{ asset('assets/js/summernote/summernote-lite.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summenote/summernote-pt-PT.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summenote/summernote-ext-databasic.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summenote/summernote-ext-hello.min.js') }}"></script>
-    <script src="{{ asset('assets/js/summenote/summernote-ext-specialchars.min.js') }}"></script>
+            <!-- Depois Summernote -->
+            <script src="{{ asset('assets/js/summernote/summernote-lite.min.js') }}"></script>
+            <script src="{{ asset('assets/js/summenote/summernote-pt-PT.min.js') }}"></script>
+            <script src="{{ asset('assets/js/summenote/summernote-ext-databasic.min.js') }}"></script>
+            <script src="{{ asset('assets/js/summenote/summernote-ext-hello.min.js') }}"></script>
+            <script src="{{ asset('assets/js/summenote/summernote-ext-specialchars.min.js') }}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                placeholder: 'Escreva a sua notícia...',
-                tabsize: 2,
-                height: 300,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ],
-                lang: 'pt-PT'
-            });
-        });
-    </script>
+            <script>
+                $(document).ready(function() {
+                    $('#summernote').summernote({
+                        placeholder: 'Escreva a sua notícia...',
+                        tabsize: 2,
+                        height: 300,
+                        toolbar: [
+                            ['style', ['style']],
+                            ['font', ['bold', 'underline', 'clear']],
+                            ['color', ['color']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['table', ['table']],
+                            ['insert', ['link', 'picture', 'video']],
+                            ['view', ['fullscreen', 'codeview', 'help']]
+                        ],
+                        lang: 'pt-PT'
+                    });
+                });
+            </script>
 </body>
 
 </html>

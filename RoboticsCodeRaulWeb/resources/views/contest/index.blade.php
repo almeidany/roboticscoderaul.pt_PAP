@@ -66,7 +66,7 @@
                 </div>
             </div>
             <button
-                class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center position-fixed bottom-0 end-0 m-3"
+                class="btn btn-primary p-3 rounded-circle d-flex align-items-center justify-content-center position-fixed bottom-0 end-0 m-3 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}"
                 type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
                 aria-controls="offcanvasExample" onclick="window.location.href='{{ route('contests.create') }}'">
                 <i class="bi bi-database-add fs-7"></i>

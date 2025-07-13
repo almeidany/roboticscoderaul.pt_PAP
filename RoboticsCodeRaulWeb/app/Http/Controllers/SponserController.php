@@ -67,17 +67,41 @@ class SponserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sponser $sponser)
+    public function edit(Sponser $sponsers)
     {
         //
+        return view('sponsers.edit', compact('sponsers'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sponser $sponser)
+    public function update(Request $request, Sponser $sponsers)
     {
         //
+        $request->validate([
+            'photo' => 'nullable|image|mimes:png|max:2048',
+            'enterprise_name' => 'required|string|max:70',
+            'designation' => 'required|string',
+            'link' => 'required|url',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension();
+            $enterpriseName = preg_replace('/[^A-Za-z0-9\-]/', '', $request->input('enterprise_name'));
+            $filename = $enterpriseName . '_' . time() . '.' . $extension;
+            $path = $file->storeAs('images/sponsers', $filename, 'public');
+            $sponsers->photo = $filename;
+        }
+
+        $sponsers->enterprise_name = $request->input('enterprise_name');
+        $sponsers->designation = $request->input('designation');
+        $sponsers->link = $request->input('link');
+
+        $sponsers->save();
+
+        return redirect()->route('sponsers')->with('message', 'Patrocinador atualizado com sucesso.');
     }
 
     /**

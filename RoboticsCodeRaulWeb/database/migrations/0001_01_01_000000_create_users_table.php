@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // This automatically creates an auto-incrementing primary key 'id'
             $table->string('first_name', 35);
             $table->string('last_name', 35);
-            $table->unsignedBigInteger('schoolnumber')->unique();
+            $table->string('schoolnumber')->unique();
             $table->date('birth_date');
             $table->unsignedBigInteger('phonenumber')->unique(); // Removed auto_increment and primary key
             $table->string('class', 10);

@@ -16,7 +16,6 @@
             <!--  Header End -->
             <div class="body-wrapper">
                 <div class="container-fluid">
-
                     <form action="{{ route('sponsers.store') }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="card">
@@ -41,7 +40,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Empresa</label>
+                                            <label class="form-label">Entidade</label>
                                             <input type="text" name="enterprise_name"
                                                 class="form-control @error('enterprise_name') is-invalid @enderror"
                                                 value="{{ old('enterprise_name') }}">

@@ -93,7 +93,7 @@
 
                                     <!-- Botões -->
                                     <div class="form-actions text-center mt-4">
-                                        <button type="submit" class="btn btn-primary">Adicionar Concurso</button>
+                                        <button type="submit" class="btn btn-primary">Adicionar Classificação</button>
                                         <a href="{{ route('palmares') }}" class="btn btn-danger ms-2">Cancelar</a>
                                     </div>
                                 </div>

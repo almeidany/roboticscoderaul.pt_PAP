@@ -134,8 +134,7 @@
                             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionFAQ1">
                                 <div class="accordion-body">
-                                    Basta ser um aluno da escola e inscrever-se através do <a
-                                        href="forminscricao.php">Formulário de Inscrição</a>
+                                    Basta ser um aluno da escola e ir a um dia do clube, para, fazer lá a sua inscrição
                                 </div>
                             </div>
                         </div>
@@ -205,7 +204,7 @@
                                 <div class="accordion-body">
                                     Poderá participar no Festival Nacional da Robótica, Bot0lympics, Roboparty e
                                     Olimpiadas da Robótica. Pode consultar individualmente sobre cada um, no menu <a
-                                        href="concursos.php">Concursos</a>.
+                                        href="{{ route('contests') }}">Concursos</a>.
                                 </div>
                             </div>
                         </div>
@@ -280,7 +279,6 @@
                         robótica.
                     </p>
                 </div>
-
                 <!-- Perfis da equipa -->
                 <div class="col-lg-7">
                     <div class="row g-4">
