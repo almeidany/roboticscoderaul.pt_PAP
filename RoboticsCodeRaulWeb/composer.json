@@ -7,9 +7,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "doctrine/dbal": "^4.3",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
-        "laravel/ui": "*",
+        "laravel/ui": "^4.6",
         "santigarcor/laratrust": "8.5"
     },
     "require-dev": {

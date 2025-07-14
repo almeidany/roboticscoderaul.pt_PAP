@@ -26,19 +26,42 @@
                             <form action="{{ route('projects.show', $project->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="row pt-3">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Nome do Projeto <span
-                                                    class="text-danger"></span></label>
-                                            <label class="form-control-plaintext">{{ $project->projectname }}</label>
+                                            <label class="form-label">Nome do Projeto</label>
+                                            <div class="form-control-plaintext">{{ $project->projectname }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-between">
+                                        <div>
+                                            <label class="form-label">Designação</label>
+                                            <div class="form-control-plaintext">{{ $project->designation }}</div>
+                                        </div>
+
+                                        {{-- Imagem do projeto à direita --}}
+                                        @if ($project->photo)
+                                            <div style="margin-left: auto;">
+                                                <img src="{{ asset('storage/images/projects/' . $project->photo) }}"
+                                                    alt="Imagem do Projeto" width="150" height="150"
+                                                    style="border-radius: 10px; object-fit: cover; border: 1px solid #ccc; margin-left: 20px; margin-top: 10px;">
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Categoria</label>
+                                            <div class="form-control-plaintext">{{ $project->category }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Designação <span
-                                                    class="text-danger"></span></label>
-                                            <label class="form-control-plaintext">{{ $project->designation }}</label>
+                                            <label class="form-label">Data de Início</label>
+                                            <div class="form-control-plaintext">{{ $project->start_date }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -46,35 +69,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Categoria<span class="text-danger"></span></label>
-                                            <label class="form-control-plaintext">
-                                                {{ $project->category }}
-                                            </label>
+                                            <label class="form-label">Data de Conclusão</label>
+                                            <div class="form-control-plaintext">{{ $project->end_date }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Data de Início <span
-                                                    class="text-danger"></span></label>
-                                            <label class="form-control-plaintext">{{ $project->start_date }}</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Data de Conclusão <span
-                                                    class="text-danger"></span></label>
-                                            <label class="form-control-plaintext">{{ $project->end_date }}</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Github <span class="text-danger"></span></label>
-                                            <label class="form-control-plaintext">
-                                                {{ $project->github_url }}
-                                            </label>
+                                            <label class="form-label">Github</label>
+                                            <div class="form-control-plaintext">{{ $project->github_url }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -83,15 +85,15 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Foto</label>
-                                            <label class="form-control-plaintext">
+                                            <div class="form-control-plaintext">
                                                 {{ $project->photo ? basename($project->photo) : 'Nenhum ficheiro selecionado' }}
-                                            </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Membros do Projeto</label>
-                                            <label class="form-control-plaintext">
+                                            <div class="form-control-plaintext">
                                                 @if ($project->users->isEmpty())
                                                     Nenhum membro atribuído
                                                 @else
@@ -99,7 +101,7 @@
                                                             return $names[0] . ' ' . $names[1];
                                                         })->join(', ') }}
                                                 @endif
-                                            </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -107,17 +109,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Descrição <span
-                                                    class="text-danger"></span></label>
-                                            <label class="form-control-plaintext">
-                                                {{ $project->description }}
-                                            </label>
+                                            <label class="form-label">Descrição</label>
+                                            <div class="form-control-plaintext">{{ $project->description }}</div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-actions text-center mt-4">
-                                    <a href="{{ route('projects') }}" class="btn btn-danger ms-2">Voltar a
-                                        Projetos</a>
+                                    <a href="{{ route('projects') }}" class="btn btn-danger ms-2">Voltar a Projetos</a>
                                 </div>
                             </form>
                         </div>

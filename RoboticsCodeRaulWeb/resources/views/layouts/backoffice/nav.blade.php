@@ -42,7 +42,7 @@
                         aria-labelledby="drop1">
                         <div class="profile-dropdown position-relative" data-simplebar="">
                             <div class="py-3 px-7 pb-0">
-                                <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
+                                <h5 class="mb-0 fs-5 fw-semibold">Perfil do utilizador</h5>
                             </div>
                             <div class="d-flex align-items-center py-9 mx-7 border-bottom">
                                 <img src="{{ asset('storage/images/users/' . (auth()->check() && auth()->user()->photo ? auth()->user()->photo : 'user-1.jpg')) }}"
@@ -64,8 +64,21 @@
                                             alt="modernize-img" width="24" height="24">
                                     </span>
                                     <div class="w-100 ps-3">
-                                        <h6 class="mb-1 fs-3 fw-semibold lh-base">Meu Perfil</h6>
-                                        <span class="fs-2 d-block text-body-secondary">Defenições da Conta</span>
+                                        <h6 class="mb-1 fs-3 fw-semibold lh-base">Editar o meu perfil</h6>
+                                        <span class="fs-2 d-block text-body-secondary">Defenições da conta</span>
+                                    </div>
+                                </a>
+                                <a href="{{ route('users.show', auth()->user()->id) }}"
+                                    class="py-8 px-7 mt-8 d-flex align-items-center">
+                                    <span
+                                        class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
+                                        <img src="{{ asset('assets/images/svgs/icon-account.svg') }}"
+                                            alt="modernize-img" width="24" height="24">
+                                    </span>
+                                    <div class="w-100 ps-3">
+                                        <h6 class="mb-1 fs-3 fw-semibold lh-base">Visualizar o meu perfil</h6>
+                                        <span class="fs-2 d-block text-body-secondary">Consultar os dados da minha
+                                            conta</span>
                                     </div>
                                 </a>
                             </div>

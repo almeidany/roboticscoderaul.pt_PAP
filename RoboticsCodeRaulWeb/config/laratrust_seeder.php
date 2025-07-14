@@ -15,6 +15,14 @@ return [
         'professor' => [
             'users' => 'c,r,u,d',
             'profile' => 'c,r,u,d',
+            'gallery' => 'c,r,u,d',
+            'news' => 'c,r,u,d',
+            'palmares' => 'c,r,u,d',
+            'classes' => 'c,r,u,d',
+            'contests' => 'c,r,u,d',
+            'sponsers' => 'c,r,u,d',
+            'attendance' => 'd',
+            'raffles' => 'c,r,u,d',
         ],
         'aluno' => [
             'profile' => 'r,u,d',

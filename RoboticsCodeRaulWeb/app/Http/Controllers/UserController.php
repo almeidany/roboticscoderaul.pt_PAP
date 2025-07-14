@@ -99,7 +99,6 @@ class UserController extends Controller
             abort(403);
         }
 
-
         // Validação dos inputs
         $validated = $request->validate([
             'raffles_given' => 'nullable|integer|min:0',
@@ -114,6 +113,14 @@ class UserController extends Controller
         if ($request->has('raffles_sold')) {
             $user->raffles_sold = $request->input('raffles_sold');
         }
+
+        $raffleUnitPrice = 1.00; // por exemplo, cada rifa vale 1 euro
+
+        // Angariado
+        $user->total_sold_byuser = $user->raffles_sold * $raffleUnitPrice;
+
+        // Rifas por devolver
+        $user->raffles_toReturn = max(0, $user->raffles_given - $user->raffles_sold);
 
         $user->save();
 

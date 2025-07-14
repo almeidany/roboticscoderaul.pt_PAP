@@ -21,16 +21,21 @@ Route::get('/patrocinadores/front/{sponsers}', [App\Http\Controllers\SponserFron
 //Index Back
 Route::get('/dashboard', [App\Http\Controllers\BackController::class, 'index'])->name('dashboard')->middleware('auth');
 
+//register
+Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
+
+//login
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+
 // Apenas PROFESSSOR
 Route::middleware(['role:professor'])->group(function () {
     Route::get('/galeria/adicionar-foto', [App\Http\Controllers\GalleryController::class, 'create'])->name('gallery.create')->middleware('auth');
     Route::post('/galeria', [App\Http\Controllers\GalleryController::class, 'store'])->name('gallery.store')->middleware('auth');
-    //Route::get('/galeria/editar/{photo}', [App\Http\Controllers\GalleryController::class, 'edit'])->name('gallery')->middleware('auth');
+    Route::get('/galeria/editar/{photo}', [App\Http\Controllers\GalleryController::class, 'edit'])->name('gallery')->middleware('auth');
     Route::put('/galeria/{photo}', [App\Http\Controllers\GalleryController::class, 'update'])->name('gallery.update')->middleware('auth');
     Route::delete('/galeria/{photo}', [App\Http\Controllers\GalleryController::class, 'destroy'])->name('gallery.destroy')->middleware('auth');
-
-    Route::put('/utilizadores/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update')->middleware('auth');
-    Route::delete('/utilizadores/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 
     Route::get('noticias/criar', [App\Http\Controllers\NewsController::class, 'create'])->name('news.create')->middleware('auth');
     Route::post('noticias', [App\Http\Controllers\NewsController::class, 'store'])->name('news.store')->middleware('auth');
@@ -60,15 +65,6 @@ Route::middleware(['role:professor'])->group(function () {
     Route::delete('/presencas/{attendance}', [App\Http\Controllers\AttendanceController::class, 'destroy'])->name('attendance.destroy')->middleware('auth');
 });
 
-// Authentication Routes
-Route::middleware('guest')->group(function () {
-    Route::get('/registo', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/registo', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
-
-    Route::get('/aceder', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/aceder', [App\Http\Controllers\Auth\LoginController::class, 'login']);
-});
-
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 });
@@ -76,39 +72,30 @@ Route::middleware('auth')->group(function () {
 //gallery backoffice
 Route::get('/galeria', [App\Http\Controllers\GalleryController::class, 'index'])->name('gallery')->middleware('auth');
 
-
 //user
 Route::get('/utilizadores', [App\Http\Controllers\UserController::class, 'index'])->name('users')->middleware('auth');
 Route::get('/utilizadores/{user}/visualizacao', [App\Http\Controllers\UserController::class, 'show'])->name('users.show')->middleware('auth');
 Route::get('/utilizadores/{user}/editar', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit')->middleware('auth');
+Route::put('/utilizadores/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update')->middleware('auth');
+Route::delete('/utilizadores/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 Route::put('/users/{id}/raffles', [App\Http\Controllers\UserController::class, 'updateRaffles'])->name('users.updateRaffles')->middleware('auth');
-
-
 
 // Listar notícias backoffice
 Route::get('noticias', [App\Http\Controllers\NewsController::class, 'index'])->name('news')->middleware('auth');
 Route::get('noticias/back/{news}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show')->middleware('auth');
-
 
 //projects
 Route::get('/projetos', [App\Http\Controllers\ProjectController::class, 'index'])->name('projects')->middleware('auth');
 Route::get('/projetos/{project}/visualizacao', [App\Http\Controllers\ProjectController::class, 'show'])->name('projects.show')->middleware('auth');
 Route::get('/projetos/criar', [App\Http\Controllers\ProjectController::class, 'create'])->name('projects.create')->middleware('auth');
 Route::post('/projetos', [App\Http\Controllers\ProjectController::class, 'store'])->name('projects.store')->middleware('auth');
-Route::middleware(['auth', 'can:update,project'])->group(function () {
-    Route::get('/projetos/{project}/editar', [App\Http\Controllers\ProjectController::class, 'edit'])->name('projects.edit');
-    Route::put('/projetos/{project}', [App\Http\Controllers\ProjectController::class, 'update'])->name('projects.update');
-    Route::delete('/projetos/{project}', [App\Http\Controllers\ProjectController::class, 'destroy'])->name('projects.destroy');
-});
+Route::get('/projetos/{project}/editar', [App\Http\Controllers\ProjectController::class, 'edit'])->name('projects.edit');
+Route::put('/projetos/{project}', [App\Http\Controllers\ProjectController::class, 'update'])->name('projects.update');
+Route::delete('/projetos/{project}', [App\Http\Controllers\ProjectController::class, 'destroy'])->name('projects.destroy');
 
 
 //raffles
 Route::get('/rifas/consulta', [App\Http\Controllers\RafflesController::class, 'index'])->name('raffles')->middleware('auth');
-
-
-Route::put('/users/{id}/raffles', [App\Http\Controllers\UserController::class, 'updateRaffles'])
-    ->name('users.updateRaffles')
-    ->middleware(['auth', 'can:updateRaffles,id']);
 
 //palmares
 Route::get('/palmares', [App\Http\Controllers\PalmaresController::class, 'index'])->name('palmares')->middleware('auth');
@@ -127,4 +114,4 @@ Route::get('/presencas', [App\Http\Controllers\AttendanceController::class, 'ind
 Route::get('/presencas/marcar', [App\Http\Controllers\AttendanceController::class, 'create'])->name('attendance.create')->middleware('auth');
 Route::post('/presencas', [App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store')->middleware('auth');
 
-Auth::routes();
+Route::get('/galeria/visualizar/{photo}', [App\Http\Controllers\GalleryController::class, 'show'])->name('gallery.show')->middleware('auth');

@@ -29,14 +29,17 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Carregar Fotografia</label>
-                                            <input class="form-control" type="file" id="formFile" name="photo">
-                                            @if (old('photo'))
-                                                <img src="{{ asset('storage/images/news/' . old('photo')) }}"
-                                                    width="100" class="mt-2">
-                                            @elseif (isset($news) && $news->photo)
+                                            <input class="form-control @error('photo') is-invalid @enderror"
+                                                type="file" id="formFile" name="photo">
+                                            @if ($news->photo)
                                                 <img src="{{ asset('storage/images/news/' . $news->photo) }}"
                                                     width="100" class="mt-2">
                                             @endif
+                                            @error('photo')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Título</label>

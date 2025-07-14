@@ -39,7 +39,8 @@
                                 </div>
                             </div>
                             <div class="news-card-footer" style="justify-content: center; ">
-                                <a href="{{ route('news.edit', $item->id) }}" class="btn btn-sm btn-outline-primary"
+                                <a href="{{ route('news.edit', $item->id) }}"
+                                    class="btn btn-sm btn-outline-primary {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}"
                                     title="Editar">
                                     <i class="bi bi-pencil"></i>
                                 </a>
@@ -47,7 +48,8 @@
                                     title="Ver Notícia" target="_blank">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <form action="{{ route('news.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('news.destroy', $item->id) }}" method="POST"
+                                    class="d-inline {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="Apagar"

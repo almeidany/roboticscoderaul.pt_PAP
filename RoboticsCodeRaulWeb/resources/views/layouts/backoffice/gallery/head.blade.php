@@ -26,5 +26,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/libs/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pfp.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('assets/css/photodisplay.css') }}">
+
 
 </head>

@@ -60,9 +60,11 @@
                                             <select class="form-select @error('category') is-invalid @enderror"
                                                 name="category" required>
                                                 <option value="" disabled>Selecione uma categoria</option>
-                                                @foreach ($categories as $index => $value)
-                                                    <option value="{{ $index }}" @selected(old('category', $project->category) == $index)>
-                                                        {{ $value }}</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->category }}"
+                                                        {{ old('category') == $category->category ? 'selected' : '' }}>
+                                                        {{ $category->category }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('category')

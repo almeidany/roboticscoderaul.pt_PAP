@@ -65,12 +65,12 @@
                         </span>
                         <span class="hide-menu">Concursos</span>
                     </a>
-                    {{-- <a class="sidebar-link" href="{{ route('gallery') }}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('gallery') }}" aria-expanded="false">
                         <span class="d-flex">
                             <i class="bi bi-archive"></i>
                         </span>
                         <span class="hide-menu">Galeria</span>
-                    </a> --}}
+                    </a>
 
                     <a class="sidebar-link" href="{{ route('raffles') }}" aria-expanded="false">
                         <span class="d-flex">

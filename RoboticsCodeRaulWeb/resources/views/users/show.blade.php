@@ -26,6 +26,7 @@
                             <form action="{{ route('users.show', $user->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="row pt-3">
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -34,12 +35,22 @@
                                             <div class="form-control-plaintext">{{ $user->first_name }}</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
+                                    <div class="col-md-6 d-flex justify-content-between">
+                                        <div>
                                             <label class="form-label">Último Nome <span
                                                     class="text-danger"></span></label>
                                             <div class="form-control-plaintext">{{ $user->last_name }}</div>
                                         </div>
+
+                                        {{-- Imagem de perfil à direita --}}
+                                        @if ($user->photo)
+                                            <div style="margin-left: auto;">
+                                                <img src="{{ asset('storage/images/users/' . $user->photo) }}"
+                                                    alt="Foto de Perfil" width="150" height="150"
+                                                    style="border-radius: 10px; object-fit: cover; border: 1px solid #ccc; 
+                                                    margin-left : 20px;">
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -83,7 +94,6 @@
                                             <div class="form-control-plaintext">{{ $user->class }}</div>
                                         </div>
                                     </div>
-                                    <!-- Campo para Tamanho da T-shirt -->
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Tamanho da T-shirt <span
@@ -123,6 +133,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-actions text-center mt-4">
                                     <a href="{{ route('users') }}" class="btn btn-danger ms-2">Voltar a membros</a>
                                 </div>

@@ -18,21 +18,20 @@
                                 aria-label="Close"></button>
                         </div>
                     @endif
-
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-
                         <!-- Nome -->
                         <div class="form-row">
-                            <div class="name">Nome</div>
+                            <div class="name">
+                                <span style="color: red;">*</span> Nome
+                            </div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group-desc">
                                             <input class="input--style-5 @error('first_name') is-invalid @enderror"
                                                 type="text" name="first_name" id="first_name"
-                                                value="{{ old('first_name') }}" placeholder="Primeiro Nome" required
-                                                style="">
+                                                value="{{ old('first_name') }}" placeholder="Primeiro Nome" required>
                                             @error('first_name')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -57,7 +56,9 @@
 
                         <!-- Dados Pessoais -->
                         <div class="form-row">
-                            <div class="name">Dados Pessoais</div>
+                            <div class="name">
+                                <span style="color: red;">*</span> Dados Pessoais
+                            </div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
@@ -88,7 +89,9 @@
 
                         <!-- Email e Telefone -->
                         <div class="form-row">
-                            <div class="name">Contactos</div>
+                            <div class="name">
+                                <span style="color: red;">*</span> Contactos
+                            </div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
@@ -118,7 +121,9 @@
 
                         <!-- Turma e Tamanho T-shirt -->
                         <div class="form-row">
-                            <div class="name" style="margin-top: 20px">Escola</div>
+                            <div class="name" style="margin-top: 20px">
+                                <span style="color: red;">*</span> Escola
+                            </div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
@@ -146,7 +151,6 @@
                                                 type="text" name="schoolnumber" id="schoolnumber"
                                                 value="{{ old('schoolnumber') }}" placeholder="Número de Processo"
                                                 required style="width: 100%;">
-                                            <!-- width 100% -->
                                             @error('schoolnumber')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -158,7 +162,9 @@
 
                         <!-- Alergias -->
                         <div class="form-row">
-                            <div class="name">Alergias Alimentares</div>
+                            <div class="name">
+                                <span style="color: red;">*</span> Alergias Alimentares
+                            </div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
@@ -200,7 +206,9 @@
                         <!-- Autorização Imagem e Foto -->
                         <div class="form-row" style="margin-bottom: 20px;">
                             <!-- Ajuste no margin-bottom -->
-                            <div class="name">Autorização de Imagem</div>
+                            <div class="name">
+                                <span style="color: red;">*</span> Autorização de Imagem
+                            </div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">
@@ -243,7 +251,9 @@
 
                         <!-- Password -->
                         <div class="form-row">
-                            <div class="name">Password</div>
+                            <div class="name">
+                                <span style="color: red;">*</span> Password
+                            </div>
                             <div class="value">
                                 <div class="row row-space">
                                     <div class="col-2">

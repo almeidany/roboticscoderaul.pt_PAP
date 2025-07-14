@@ -38,7 +38,8 @@
                                                 Github</th>
                                             <th data-priority="4" scope="col" class="px-0 text-muted text-center">
                                                 Estado</th>
-                                            <th data-priority="5" scope="col" class="px-0 text-muted text-center">
+                                            <th data-priority="5" scope="col"
+                                                class="px-0 text-muted text-center {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                                 Ações</th>
                                         </tr>
                                     </thead>
@@ -79,7 +80,8 @@
                                                         <span class="badge bg-warning">Em Progresso</span>
                                                     @endif
                                                 </td>
-                                                <td class="px-0">
+                                                <td
+                                                    class="px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                                     <form id="deleteProject{{ $project->id }}"
                                                         action="{{ route('projects.destroy', $project->id) }}"
                                                         method="POST">

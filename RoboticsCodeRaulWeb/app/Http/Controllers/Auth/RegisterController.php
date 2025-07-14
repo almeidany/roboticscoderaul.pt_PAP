@@ -3,25 +3,43 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\tshirts;
 use App\Models\User;
+use App\Models\Tshirts;
+use App\Models\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Registered;
-use App\Models\Classes;
-
 use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
+    // Mostrar formulário (com tshirt_sizes e classes)
+    public function showRegistrationForm()
+    {
+        $tshirt_sizes = Tshirts::all();
+        $classes = Classes::orderBy('class_year', 'asc')
+            ->orderBy('class', 'asc')
+            ->get()
+            ->map(function ($item) {
+                $item->full_class = $item->class_year . $item->class;
+                return $item;
+            });
+
+        return view('auth.register', compact('tshirt_sizes', 'classes'));
+    }
+
+    // Validação dos dados
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'first_name' => 'required|string|max:35',
             'last_name' => 'required|string|max:35',
-            'schoolnumber' => 'required|numeric|unique:users',
+            'schoolnumber' => 'required|string|regex:/^\d{5,6}$/|unique:users|max:6',
             'birth_date' => 'required|date',
             'phonenumber' => 'required|numeric|unique:users',
             'class' => 'required|string|max:10',
@@ -34,6 +52,7 @@ class RegisterController extends Controller
         ]);
     }
 
+    // Criação do usuário + login automático
     protected function create(array $data)
     {
         $photoName = null;
@@ -64,34 +83,23 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // Atribuir o role "aluno"
         $user->addRole('aluno');
+
         Auth::login($user);
 
         return $user;
     }
 
+    // Método register para receber POST, validar, criar e redirecionar
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+        $data = $request->all();
+        $data['photo'] = $request->file('photo');
 
-        return redirect('/login');
-    }
+        $this->create($data);
 
-    public function showRegistrationForm()
-    {
-        //order by alphabetical order
-
-        $tshirt_sizes = Tshirts::all();
-        $classes = Classes::orderBy('class_year', 'asc')
-            ->orderBy('class', 'asc')
-            ->get()
-            ->map(function ($item) {
-                $item->full_class = $item->class_year . $item->class;
-                return $item;
-            });
-        return view('auth.register', compact('tshirt_sizes', 'classes'));
+        return redirect('/dashboard');  // redireciona após login
     }
 }

@@ -12,7 +12,6 @@
                 <div class="login100-pic js-tilt" data-tilt>
                     <img src="{{ asset('assets/images/login_imagem.png') }}">
                 </div>
-
                 <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <span class="login100-form-title">

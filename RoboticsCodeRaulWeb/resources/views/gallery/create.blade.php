@@ -28,17 +28,19 @@
                                 <div class="form-group">
                                     <div class="row mb-3">
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label">Carregar Fotografia</label>
+                                            <label class="form-label">Carregar Fotografias</label>
                                             <input class="form-control @error('photo') is-invalid @enderror"
-                                                type="file" id="formFile" name="photo">
+                                                type="file" id="formFile" name="photo[]" multiple>
                                             @error('photo')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
-                                            @if (isset($photo) && $photo->photo)
-                                                <img src="{{ asset('storage/images/gallery/' . $photo->photo) }}"
-                                                    width="100" class="mt-2">
+                                            @if (isset($photo) && is_array($photo->photo))
+                                                @foreach ($photo->photo as $img)
+                                                    <img src="{{ asset('storage/images/gallery/' . $img) }}"
+                                                        width="100" class="mt-2 me-2">
+                                                @endforeach
                                             @endif
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -59,18 +61,18 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Concurso</label>
                                                 <select
-                                                    class="select2 form-control @error('palmares') is-invalid @enderror"
-                                                    id="palmares" name="palmares">
+                                                    class="select2 form-control @error('contest') is-invalid @enderror"
+                                                    id="contest" name="contest">
                                                     <option value="" disabled selected>Selecione o concurso
                                                         correspondente</option>
-                                                    @foreach ($palmares as $contest)
+                                                    @foreach ($contests as $contest)
                                                         <option value="{{ $contest->name }}"
-                                                            {{ old('palmares') == $contest->name ? 'selected' : '' }}>
+                                                            {{ old('contest') == $contest->name ? 'selected' : '' }}>
                                                             {{ $contest->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                @error('palmares')
+                                                @error('contest')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>

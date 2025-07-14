@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
-use App\Models\Palmares;
+use App\Models\Contest;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -14,18 +14,18 @@ class GalleryController extends Controller
     public function index()
     {
         //
-        //$photo = Gallery::all();
-        return view('gallery.index');
+        $gallery = Gallery::all();
+        return view('gallery.index', compact('gallery'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Palmares $palmares)
+    public function create()
     {
         //
-        $palmares = Palmares::all();
-        return view('gallery.create', compact('palmares'));
+        $contests = Contest::all();
+        return view('gallery.create', compact('contests'));
     }
 
     /**
@@ -34,30 +34,35 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:10024',
+            'photo' => 'required', // importante validar o campo, mesmo que único
+            'photo.*' => 'image|mimes:jpeg,png,jpg|max:10024',
             'title' => 'required|string|max:255',
-            'palmares' => 'required|string|max:255',
+            'contest' => 'required|string|max:255',
             'year' => 'required|integer',
         ]);
 
-        $photo = new Gallery();
+        $photos = $request->file('photo');
 
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $extension = $file->getClientOriginalExtension();
-            $title = preg_replace('/[^A-Za-z0-9\-]/', '', $request->input('title'));
-            $name = $title . '_' . time() . '.' . $extension;
-            $path = $file->storeAs('public/images/gallery', $name);
-            $photo->photo = $name;
+        // Garante que $photos seja um array mesmo com uma única imagem
+        if (!is_array($photos)) {
+            $photos = [$photos];
         }
 
-        $photo->title = $request->input('title');
-        $photo->palmares = $request->input('palmares');
-        $photo->year = $request->input('year');
-        //log de debug dd;
-        $photo->save();
+        foreach ($photos as $file) {
+            $extension = $file->getClientOriginalExtension();
+            $title = preg_replace('/[^A-Za-z0-9\-]/', '', $request->input('title'));
+            $name = $title . '_' . time() . '_' . uniqid() . '.' . $extension;
+            $file->storeAs('images/gallery', $name);
 
-        return redirect()->route('gallery')->with('message', 'Fotografia adicionada com sucesso!');
+            $photo = new Gallery();
+            $photo->photo = $name;
+            $photo->title = $request->input('title');
+            $photo->contest = $request->input('contest');
+            $photo->year = $request->input('year');
+            $photo->save();
+        }
+
+        return redirect()->route('gallery')->with('message', 'Fotos enviadas com sucesso!');
     }
 
     /**
@@ -87,5 +92,18 @@ class GalleryController extends Controller
     public function destroy(Gallery $photo)
     {
         //
+        if ($photo->photo) {
+            $filePath = public_path('images/gallery/' . $photo->photo);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        $photo->delete();
+        return redirect()->route('gallery')->with('message', 'Foto eliminada com sucesso!');
+    }
+
+    public function show(Gallery $photo)
+    {
+        return view('gallery.show', compact('photo'));
     }
 }

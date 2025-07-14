@@ -33,7 +33,9 @@
                                             <th class="text-center">Nome</th>
                                             <th class="text-center">Estado</th>
                                             <th class="text-center">Data/Hora</th>
-                                            <th class="text-center">Ações</th>
+                                            <th
+                                                class="text-center {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
+                                                Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,8 +52,8 @@
                                                     <h6 class="mb-0 fw-bold">
                                                         {{ $attendance->user->first_name . ' ' . $attendance->user->last_name }}
                                                     </h6>
-                                                    <small
-                                                        class="text-muted">{{ $attendance->user->email ?? '' }}</small>
+                                                    <small class="text-muted">{{ $attendance->user->email ?? '' }}
+                                                    </small>
                             </div>
                         </div>
                         </td>
@@ -61,7 +63,7 @@
                         <td>
                             {{ $attendance->attendance_date ? \Carbon\Carbon::parse($attendance->attendance_date)->format('d/m/Y H:i') : '' }}
                         </td>
-                        <td class="px-0">
+                        <td class="px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                             <form id="deleteAttendance{{ $attendance->id }}"
                                 action="{{ route('attendance.destroy', $attendance->id) }}" method="POST"
                                 class="d-inline">

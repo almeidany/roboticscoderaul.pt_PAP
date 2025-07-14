@@ -46,7 +46,7 @@
                                                 </td>
                                                 <td class="px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                                     <form id="deleteContest{{ $contests->id }}"
-                                                        action="{{ route('projects.destroy', $contests->id) }}"
+                                                        action="{{ route('contests.destroy', $contests->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
