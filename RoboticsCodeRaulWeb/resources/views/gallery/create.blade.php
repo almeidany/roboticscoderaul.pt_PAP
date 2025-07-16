@@ -66,8 +66,8 @@
                                                     <option value="" disabled selected>Selecione o concurso
                                                         correspondente</option>
                                                     @foreach ($contests as $contest)
-                                                        <option value="{{ $contest->name }}"
-                                                            {{ old('contest') == $contest->name ? 'selected' : '' }}>
+                                                        <option value="{{ $contest->id }}"
+                                                            {{ old('contest') == $contest->id ? 'selected' : '' }}>
                                                             {{ $contest->name }}
                                                         </option>
                                                     @endforeach

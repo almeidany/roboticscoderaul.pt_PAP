@@ -37,7 +37,7 @@ class GalleryController extends Controller
             'photo' => 'required', // importante validar o campo, mesmo que único
             'photo.*' => 'image|mimes:jpeg,png,jpg|max:10024',
             'title' => 'required|string|max:255',
-            'contest' => 'required|string|max:255',
+            'contest' => 'required|integer|exists:contests,id', // agora valida o ID do concurso
             'year' => 'required|integer',
         ]);
 
@@ -57,7 +57,7 @@ class GalleryController extends Controller
             $photo = new Gallery();
             $photo->photo = $name;
             $photo->title = $request->input('title');
-            $photo->contest = $request->input('contest');
+            $photo->contest_id = $request->input('contest');
             $photo->year = $request->input('year');
             $photo->save();
         }

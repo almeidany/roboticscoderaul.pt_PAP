@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('photo');
             $table->string('title');
-            $table->string('palmares');
+            $table->string('contest');
             $table->integer('year');
+            $table->unsignedBigInteger('contest_id'); // Chave estrangeira
             $table->timestamps();
+
+            $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
         });
     }
 
