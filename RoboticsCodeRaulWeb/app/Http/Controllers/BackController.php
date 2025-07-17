@@ -30,6 +30,10 @@ class BackController extends Controller
         $latestUsers = User::latest()
             ->limit(4)
             ->get();
-        return view('dashboard.index', compact('attendancesCount', 'usersCount', 'projectsCount', 'classesCount', 'sponsersCount', 'newsCount', 'rafflesSum', 'latestUsers'));
+        $classesCount_donut = User::select('class')
+            ->groupBy('class')
+            ->selectRaw('class, COUNT(*) as total')
+            ->get();
+        return view('dashboard.index', compact('attendancesCount', 'usersCount', 'projectsCount', 'classesCount', 'sponsersCount', 'newsCount', 'rafflesSum', 'latestUsers', 'classesCount_donut'));
     }
 }

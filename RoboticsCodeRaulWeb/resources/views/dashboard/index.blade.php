@@ -98,59 +98,8 @@
                                 <div class="col-lg-8 d-flex align-items-stretch">
                                     <div class="card w-100">
                                         <div class="card-body">
-                                            <div
-                                                class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                                                <div class="mb-3 mb-sm-0">
-                                                    <h4 class="card-title fw-semibold">Revenue Updates</h4>
-                                                    <p class="card-subtitle mb-0">Overview of Profit</p>
-                                                </div>
-                                                <select class="form-select w-auto">
-                                                    <option value="1">March 2024</option>
-                                                    <option value="2">April 2024</option>
-                                                    <option value="3">May 2024</option>
-                                                    <option value="4">June 2024</option>
-                                                </select>
-                                            </div>
-                                            <div class="row align-items-center">
-                                                <div class="col-md-8">
-                                                    <div id="chart" class="mx-n6"></div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="hstack mb-4 pb-1">
-                                                        <div
-                                                            class="p-8 bg-primary-subtle rounded-1 me-3 d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-grid-dots text-primary fs-6"></i>
-                                                        </div>
-                                                        <div>
-                                                            <h4 class="mb-0 fs-7 fw-semibold">$63,489.50</h4>
-                                                            <p class="fs-3 mb-0">Total Earnings</p>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div class="d-flex align-items-baseline mb-4">
-                                                            <span
-                                                                class="round-8 text-bg-primary rounded-circle me-6"></span>
-                                                            <div>
-                                                                <p class="fs-3 mb-1">Earnings this month</p>
-                                                                <h6 class="fs-5 fw-semibold mb-0">$48,820</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex align-items-baseline mb-4 pb-1">
-                                                            <span
-                                                                class="round-8 text-bg-secondary rounded-circle me-6"></span>
-                                                            <div>
-                                                                <p class="fs-3 mb-1">Expense this month</p>
-                                                                <h6 class="fs-5 fw-semibold mb-0">$26,498</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <button class="btn btn-primary w-100">
-                                                                View Full Report
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <h4 class="fw-bold mb-4">Quantidade de alunos por turma</h4>
+                                            <canvas id="classChart" style="max-height: 300px;"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -217,6 +166,49 @@
                 <script src="{{ asset('assets/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
                 <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
                 <script src="{{ asset('assets/js/dashboards/dashboard.js') }}"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const labels = {!! $classesCount_donut->pluck('class') !!};
+                        const data = {!! $classesCount_donut->pluck('total') !!};
+
+                        const ctx = document.getElementById('classChart').getContext('2d');
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    data: data,
+                                    backgroundColor: [
+                                        '#36A2EB', '#4BC0C0', '#FFCE56', '#FF6384', '#9966FF',
+                                        '#00A36C', '#FF8C00', '#8B0000', '#20B2AA', '#A52A2A'
+                                    ],
+                                    borderWidth: 1,
+                                }]
+                            },
+                            options: {
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                const nomeTurma = context.label;
+                                                const quantidade = context.raw;
+                                                return `${quantidade} alunos - ${nomeTurma}`;
+                                            }
+                                        }
+                                    }
+                                },
+                                cutout: '60%',
+                                responsive: true,
+                                maintainAspectRatio: false
+                            }
+                        });
+                    });
+                </script>
 </body>
 
 </html>
