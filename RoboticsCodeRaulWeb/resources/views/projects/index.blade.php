@@ -38,8 +38,7 @@
                                                 Github</th>
                                             <th data-priority="4" scope="col" class="px-0 text-muted text-center">
                                                 Estado</th>
-                                            <th data-priority="5" scope="col"
-                                                class="px-0 text-muted text-center {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
+                                            <th data-priority="5" scope="col" class="px-0 text-muted text-center">
                                                 Ações</th>
                                         </tr>
                                     </thead>
@@ -80,17 +79,27 @@
                                                         <span class="badge bg-warning">Em Progresso</span>
                                                     @endif
                                                 </td>
-                                                <td
-                                                    class="px-0 {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
-                                                    <form id="deleteProject{{ $project->id }}"
-                                                        action="{{ route('projects.destroy', $project->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger"
-                                                            onclick="return confirm('Tem certeza que deseja excluir este projeto?')">
-                                                            <i class="bi bi-trash"></i>
-                                                        </button>
+                                                <td class="px-0 text-center">
+                                                    @php
+                                                        $userId = auth()->user()->id;
+                                                        $isOwner = $project->main_creator == $userId;
+                                                        $isColleague = $project->users->contains('id', $userId);
+                                                        $isProfessor =
+                                                            auth()->user()->hasRole('professor') ||
+                                                            auth()->user()->hasRole('admin');
+                                                    @endphp
+
+                                                    @if ($isOwner || $isColleague || $isProfessor)
+                                                        <form id="deleteProject{{ $project->id }}"
+                                                            action="{{ route('projects.destroy', $project->id) }}"
+                                                            method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger"
+                                                                onclick="return confirm('Tem certeza que deseja excluir este projeto?')">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </form>
                                                         <a href="{{ route('projects.edit', $project->id) }}"
                                                             class="btn btn-warning">
                                                             <i class="bi bi-pencil"></i>
@@ -99,7 +108,21 @@
                                                             class="btn btn-info">
                                                             <i class="bi bi-eye"></i>
                                                         </a>
-                                                    </form>
+                                                    @else
+                                                        {{-- Usuário não tem permissões --}}
+                                                        <button class="btn btn-light disabled" data-bs-toggle="tooltip"
+                                                            title="Sem permissão">
+                                                            <i class="bi bi-ban text-muted"></i>
+                                                        </button>
+                                                        <button class="btn btn-light disabled" data-bs-toggle="tooltip"
+                                                            title="Sem permissão">
+                                                            <i class="bi bi-ban text-muted"></i>
+                                                        </button>
+                                                        <button class="btn btn-light disabled" data-bs-toggle="tooltip"
+                                                            title="Sem permissão">
+                                                            <i class="bi bi-ban text-muted"></i>
+                                                        </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

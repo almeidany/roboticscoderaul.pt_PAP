@@ -45,7 +45,7 @@
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <a href="{{ route('news.show', $item->id) }}" class="btn btn-sm btn-outline-secondary"
-                                    title="Ver Notícia" target="_blank">
+                                    title="Ver Notícia">
                                     <i class="bi bi-eye"></i>
                                 </a>
                                 <form action="{{ route('news.destroy', $item->id) }}" method="POST"

@@ -43,7 +43,7 @@
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <a href="{{ route('sponsers.show', $item->id) }}"
-                                    class="btn btn-sm btn-outline-secondary" title="Ver Notícia" target="_blank">
+                                    class="btn btn-sm btn-outline-secondary" title="Ver Notícia">
                                     <i class="bi bi-eye"></i>
                                 </a>
                                 <form action="{{ route('sponsers.destroy', $item->id) }}" method="POST"

@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
             <div class="navbar-nav">
                 <a href="{{ route('home') }}" class="nav-item nav-link">Página Inicial</a>
-                <a href="{{ route('contest') }}" class="nav-item nav-link">Concursos</a>
+                <a href="{{ route('contest.front') }}" class="nav-item nav-link">Concursos</a>
                 <a href="{{ route('gallery.front') }}" class="nav-item nav-link">Galeria</a>
                 <a href="{{ route('news.front') }}" class="nav-item nav-link">Notícias</a>
                 <a href="{{ route('sponsers.front') }}" class="nav-item nav-link">Patrocionadores</a>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\project_user;
@@ -13,7 +15,8 @@ class ProjectController extends Controller
     public function index()
     {
         //
-        $projects = Project::all();
+
+        $projects = Project::with('users')->get();
         return view('projects.index', compact('projects'));
     }
 
@@ -47,6 +50,7 @@ class ProjectController extends Controller
 
         $project = new Project();
         $project->projectname = $request->input('projectname');
+        $project->main_creator = Auth::user()->id;
         $project->designation = $request->input('designation');
         $project->category = $request->input('category');
         $project->start_date = $request->input('start_date');

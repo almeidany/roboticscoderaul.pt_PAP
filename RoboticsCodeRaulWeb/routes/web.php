@@ -10,7 +10,7 @@ Route::redirect('/', '/home');
 Route::get('/home', [App\Http\Controllers\FrontController::class, 'index'])->name('home');
 Route::get('/sobre-nos', [App\Http\Controllers\FrontController::class, 'about_us'])->name('about_us');
 Route::get('/galeria/front', [App\Http\Controllers\GalleryFrontController::class, 'index'])->name('gallery.front');
-Route::get('/concursos/front', [App\Http\Controllers\FrontController::class, 'contest'])->name('contest');
+Route::get('/concursos/front', [App\Http\Controllers\FrontController::class, 'contest'])->name('contest.front');
 
 // Listar notícias frontoffice
 Route::get('/noticias/front', [App\Http\Controllers\NewsFrontController::class, 'index'])->name('news.front');

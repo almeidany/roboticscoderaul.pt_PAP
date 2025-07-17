@@ -204,7 +204,7 @@
                                 <div class="accordion-body">
                                     Poderá participar no Festival Nacional da Robótica, Bot0lympics, Roboparty e
                                     Olimpiadas da Robótica. Pode consultar individualmente sobre cada um, no menu <a
-                                        href="{{ route('contests') }}">Concursos</a>.
+                                        href="{{ route('contest.front') }}">Concursos</a>.
                                 </div>
                             </div>
                         </div>

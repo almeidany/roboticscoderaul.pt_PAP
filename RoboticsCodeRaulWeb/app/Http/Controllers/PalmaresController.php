@@ -54,35 +54,10 @@ class PalmaresController extends Controller
         return redirect()->route('palmares')->with('message', 'Palmarés criado com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Palmares $palmares)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Palmares $palmares)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Palmares $palmares)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Palmares $palmares)
     {
         //
+        $palmares->delete();
+        return redirect()->route('palmares')->with('message', 'Classificação removida com sucesso.');
     }
 }

@@ -88,7 +88,6 @@
                             </div>
                         </div>
                     </form>
-                    @include('layouts.backoffice.Settings_Script')
                 </div>
             </div>
             <div class="dark-transparent sidebartoggler"></div>
