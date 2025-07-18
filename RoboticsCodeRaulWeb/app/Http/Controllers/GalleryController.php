@@ -104,6 +104,7 @@ class GalleryController extends Controller
 
     public function show(Gallery $photo)
     {
+        $photo->load('contest');
         return view('gallery.show', compact('photo'));
     }
 }

@@ -30,8 +30,8 @@
                                     <h4 class="card-title">Lista das Turmas</h4>
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="px-0 text-muted text-center">Turma</th>
                                             <th scope="col" class="px-0 text-muted text-center">Ano</th>
+                                            <th scope="col" class="px-0 text-muted text-center">Turma</th>
                                             <th scope="col"
                                                 class="px-0 text-muted text-center {{ auth()->user()->hasRole('aluno') ? 'd-none' : '' }}">
                                                 Ações</th>

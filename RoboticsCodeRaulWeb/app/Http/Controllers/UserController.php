@@ -91,6 +91,8 @@ class UserController extends Controller
 
     public function updateRaffles(Request $request, $id, User $user)
     {
+        $raffleUnitPrice = 1.00; // por exemplo, cada rifa vale 1 euro
+
         $user = User::findOrFail($id);
 
         $authUser = Auth::user();
@@ -100,21 +102,17 @@ class UserController extends Controller
         }
 
         // Validação dos inputs
-        $validated = $request->validate([
-            'raffles_given' => 'nullable|integer|min:0',
-            'raffles_sold'  => 'nullable|integer|min:0',
-        ]);
+        $user->raffles_toReturn = max(0, $user->raffles_given - $user->raffles_sold);
+        $user->total_sold_byuser =  $user->raffles_sold * $raffleUnitPrice;
 
-        // Aplica valores apenas se existirem no request
+
+
         if ($request->has('raffles_given')) {
             $user->raffles_given = $request->input('raffles_given');
         }
-
         if ($request->has('raffles_sold')) {
             $user->raffles_sold = $request->input('raffles_sold');
         }
-
-        $raffleUnitPrice = 1.00; // por exemplo, cada rifa vale 1 euro
 
         // Angariado
         $user->total_sold_byuser = $user->raffles_sold * $raffleUnitPrice;

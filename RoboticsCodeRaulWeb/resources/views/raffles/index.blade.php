@@ -97,7 +97,7 @@
                                                 {{-- Rifas Por Devolver --}}
                                                 <td class="px-0 text-center">
                                                     @if (auth()->user()->hasRole('professor') || auth()->id() === $user->id)
-                                                        {{ max(0, $user->raffles_toReturn) }}
+                                                        {{ $user->raffles_toReturn }}
                                                     @else
                                                         <span class="text-muted">?</span>
                                                     @endif

@@ -39,7 +39,9 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Concurso</label>
-                                                <div class="form-control-plaintext">{{ $photo->contest }}</div>
+                                                <div class="form-control-plaintext">
+                                                    {{ $photo->contest ? $photo->contest->name : 'Sem concurso' }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
